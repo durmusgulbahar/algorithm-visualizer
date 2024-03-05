@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.barContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .bar {
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: white;
+    padding: 5px;
+    background-color: #555; 
+    transition: background-color 0.3s ease; 
+  }
+  
+  .correctLocation {
+    background-color: #4CAF50;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .sortButton {
+    padding: 10px 20px;
+    border: none;
+    background-color: #000000;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .bar.correct {
+    background-color: #4CAF50;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }

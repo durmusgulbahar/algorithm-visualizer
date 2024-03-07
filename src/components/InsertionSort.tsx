@@ -43,6 +43,11 @@ const InsertionSortVisualizer = ({ arr }: { arr: number[] }) => {
 
   return (
     <div className={styles.container}>
+      <h1>Insertion Sort Algoritm</h1>
+      <div className="inputArea">
+            <input type="text" placeholder="Enter input..."/>
+            <button>Submit</button>
+      </div>
       <div className={styles.barContainer}>
         {sortStates[currentStep]?.currentListState.map((value, index) => (
           <div

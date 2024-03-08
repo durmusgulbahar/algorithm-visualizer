@@ -1,10 +1,18 @@
-import InsertionSortVisualizer from "../components/InsertionSort";
+import Link from 'next/link';
+import styles from '../styles/home.module.css'
 
 export default function Home() {
-
   return (
-    <main>
-      <InsertionSortVisualizer arr={[3,15,4,4,2,10,21,89]}/>
-    </main>
+      <div>
+        <header>
+          <h1>All Animations</h1>
+        </header>
+        <div className={styles.container}>
+          <div className={styles.animationDisplay}>
+            <Link href="/InsertionSortPage" style={{ textDecoration: 'none', color: "white"}}>Insertion Sort</Link>
+          </div>
+          <div className={styles.animationDisplay}>Quicksort</div>
+        </div>
+      </div>
   );
 }

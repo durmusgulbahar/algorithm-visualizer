@@ -1,52 +1,47 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { LinkedList, SortState } from "../models/LinkedList";
 import styles from "../styles/InsertionSort.module.css";
 
-const InsertionSortVisualizer = ({ arr }: { arr: number[] }) => {
-  // Initial array to sort
-  const initialArray = arr;
+async function fetchQuickSort(arr: number[]) {
+  const response = await fetch("http://localhost:3000/api/quickSort", {
+    method: "POST",
+    body: JSON.stringify({ arr }),
+  });
+  const data = await response.json();
+  return data.states;
+}
+const QuickSortVisualizer = () => {
   // State to hold the sorting states
   const [sortStates, setSortStates] = useState<SortState[]>([]);
   // State to control the current displayed state
   const [currentStep, setCurrentStep] = useState(0);
 
-  const insertionSortWithStateTracking = (arr: number[]) => {
-    let states: SortState[] = [];
-    for (let i = 0; i < arr.length; i++) {
-      let currentElement = arr[i];
-      let j = i - 1;
+  const [inputArr, setInputArr] = useState("");
 
-      while (j >= 0 && arr[j] > currentElement) {
-        arr[j + 1] = arr[j];
-        j--;
-        states.push({
-          currentIndex: j + 1,
-          currentElement: currentElement,
-          currentListState: [...arr],
-          isPlacedCorrectLocation: false,
-        });
-      }
-      arr[j + 1] = currentElement;
-      states.push({
-        currentIndex: i,
-        currentElement: currentElement,
-        currentListState: [...arr],
-        isPlacedCorrectLocation: true,
-      });
-    }
+  async function getStates() {
+    const arr = inputArr.split(",").map(Number);
+    const states = await fetchQuickSort(arr);
     setSortStates(states);
-  };
+  }
 
-  useEffect(() => {
-    insertionSortWithStateTracking([...initialArray]);
-  }, []);
+  function handleInputChange(event: {
+    target: { value: React.SetStateAction<string> };
+  }) {
+    setInputArr(event.target.value);
+  }
 
   return (
     <div className={styles.container}>
-      <h1>Insertion Sort Algoritm</h1>
+      <h1>Quick Sort Algoritm</h1>
       <div className="inputArea">
-            <input type="text" placeholder="Enter input..."/>
-            <button>Submit</button>
+        <input
+          type="text"
+          placeholder="Enter input..."
+          value={inputArr}
+          onChange={handleInputChange}
+        />
+        <button onClick={getStates}>Submit</button>
       </div>
       <div className={styles.barContainer}>
         {sortStates[currentStep]?.currentListState.map((value, index) => (
@@ -88,4 +83,4 @@ const InsertionSortVisualizer = ({ arr }: { arr: number[] }) => {
   );
 };
 
-export default InsertionSortVisualizer;
+export default QuickSortVisualizer;

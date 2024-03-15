@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '@/app/styles/home.module.css'
+import styles from '@/src/styles/home.module.css'
 
 export default function Home() {
   return (
@@ -13,6 +13,9 @@ export default function Home() {
           </div>
           <div className={styles.animationDisplay}>
           <Link href="/QuickSortPage" style={{ textDecoration: 'none', color: "white"}}>Quick Sort</Link>
+          </div>
+          <div className={styles.animationDisplay}>
+          <Link href="/LinearSearchPage" style={{ textDecoration: 'none', color: "white"}}>Linear Search</Link>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import './global.css'
 
-import Footer from "./components/Footer";
+import Footer from "@/src/components/Footer";
 
 export const metadata: Metadata = {
   title: "Algorithm Visualizer",

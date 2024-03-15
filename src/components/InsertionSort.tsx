@@ -1,17 +1,16 @@
-"use client";
 import React, { useState, useEffect } from "react";
-import { LinkedList, SortState } from "../models/LinkedList";
+import { SortState } from "@/src/models/InsertionSort/InsertionSortState";
 import styles from "../styles/InsertionSort.module.css";
 
-async function fetchQuickSort(arr: number[]) {
-  const response = await fetch("http://localhost:3000/api/quickSort", {
+async function fetchInsertionSortStates(arr: number[]) {
+  const response = await fetch("http://localhost:3000/api/insertionSort", {
     method: "POST",
     body: JSON.stringify({ arr }),
   });
   const data = await response.json();
   return data.states;
 }
-const QuickSortVisualizer = () => {
+const InsertionSortVisualizer = () => {
   // State to hold the sorting states
   const [sortStates, setSortStates] = useState<SortState[]>([]);
   // State to control the current displayed state
@@ -21,7 +20,7 @@ const QuickSortVisualizer = () => {
 
   async function getStates() {
     const arr = inputArr.split(",").map(Number);
-    const states = await fetchQuickSort(arr);
+    const states = await fetchInsertionSortStates(arr);
     setSortStates(states);
   }
 
@@ -30,10 +29,14 @@ const QuickSortVisualizer = () => {
   }) {
     setInputArr(event.target.value);
   }
-
+  function determineColor(index:number, state:SortState) {
+    if (index === state.currentIndex) return 'red'; // Element being inserted
+    if (state.isPlacedCorrectLocation && index <= state.currentIndex) return 'green'; // Correctly placed
+    return 'grey'; // Default color
+  }
   return (
     <div className={styles.container}>
-      <h1>Quick Sort Algoritm</h1>
+      <h1>Insertion Sort Algoritm</h1>
       <div className="inputArea">
         <input
           type="text"
@@ -53,7 +56,7 @@ const QuickSortVisualizer = () => {
                 : ""
             }`}
             key={index}
-            style={{ height: `${(value + 15) * 1.5}px` }}
+            style={{ height: `${(value + 15) * 1.5}px`, backgroundColor: determineColor(index, sortStates[currentStep])}}
           >
             {value}
           </div>
@@ -83,4 +86,4 @@ const QuickSortVisualizer = () => {
   );
 };
 
-export default QuickSortVisualizer;
+export default InsertionSortVisualizer;

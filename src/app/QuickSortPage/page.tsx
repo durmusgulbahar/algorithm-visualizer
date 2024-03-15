@@ -1,4 +1,5 @@
-import QuickSortVisualizer from '@/app/components/QuickSort';
+"use client";
+import QuickSortVisualizer from '@/src/components/QuickSort';
 
 export default function QuickSortPage() { 
   return (

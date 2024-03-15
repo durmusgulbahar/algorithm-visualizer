@@ -1,43 +1,46 @@
-'use client'
 import React, { useState, useEffect } from "react";
-import { LinkedList, SortState } from "../models/LinkedList";
+import { SortState } from "@/src/models/InsertionSort/InsertionSortState";
 import styles from "../styles/InsertionSort.module.css";
 
-async function fetchInsertionSortStates(arr: number[]) {
-  const response = await fetch("http://localhost:3000/api/insertionSort", {
+async function fetchQuickSort(arr: number[]) {
+  const response = await fetch("http://localhost:3000/api/quickSort", {
     method: "POST",
     body: JSON.stringify({ arr }),
   });
   const data = await response.json();
   return data.states;
 }
-const InsertionSortVisualizer = () => {
-
-
+const QuickSortVisualizer = () => {
   // State to hold the sorting states
   const [sortStates, setSortStates] = useState<SortState[]>([]);
   // State to control the current displayed state
   const [currentStep, setCurrentStep] = useState(0);
-  
-  const [inputArr, setInputArr] = useState('');
 
-  async function getStates(){
-    const arr = inputArr.split(',').map(Number);
-    const states = await fetchInsertionSortStates(arr);
+  const [inputArr, setInputArr] = useState("");
+
+  async function getStates() {
+    const arr = inputArr.split(",").map(Number);
+    const states = await fetchQuickSort(arr);
     setSortStates(states);
   }
 
-  function handleInputChange(event: { target: { value: React.SetStateAction<string>; }; }) {
+  function handleInputChange(event: {
+    target: { value: React.SetStateAction<string> };
+  }) {
     setInputArr(event.target.value);
   }
 
-
   return (
     <div className={styles.container}>
-      <h1>Insertion Sort Algoritm</h1>
+      <h1>Quick Sort Algoritm</h1>
       <div className="inputArea">
-            <input type="text" placeholder="Enter input..." value={inputArr} onChange={handleInputChange} />
-            <button onClick={getStates}>Submit</button>
+        <input
+          type="text"
+          placeholder="Enter input..."
+          value={inputArr}
+          onChange={handleInputChange}
+        />
+        <button onClick={getStates}>Submit</button>
       </div>
       <div className={styles.barContainer}>
         {sortStates[currentStep]?.currentListState.map((value, index) => (
@@ -79,4 +82,4 @@ const InsertionSortVisualizer = () => {
   );
 };
 
-export default InsertionSortVisualizer;
+export default QuickSortVisualizer;

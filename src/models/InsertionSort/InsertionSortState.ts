@@ -3,4 +3,6 @@ export type SortState = {
   currentElement: number;
   currentListState: number[];
   isPlacedCorrectLocation: boolean;
+  msg:string
 };
+

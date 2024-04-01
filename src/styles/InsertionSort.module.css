@@ -6,69 +6,63 @@
   justify-content: center;
 }
 
-
 .barContainer {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 10px;
-    margin: 20px 0;
-    padding: 20px;
-    background-color: #222222;
-    border: 2px solid #555555;
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-    border-radius: 5px;
-  }
-  
-  .bar {
-    width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    color: white;
-    padding: 20px;
-    background-color: #555; 
-    transition: background-color 0.3s ease; 
-  }
-  
-  .correctLocation {
-    background-color: #4CAF50;
-  }
-  
-  .buttonContainer {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #222222;
+  border: 2px solid #555555;
+  text-align: center;
+  border-radius: 10px;
+}
 
-  }
-  
-  .sortButton {
-    padding: 10px 20px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 5px;
-    font-size: 16px;
-    background-color: #333333;
-    border: 1px solid #555555;
-    border-radius: 5px;
-  }
+.bar {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+  padding: 20px;
+  background-color: #555;
+  transition: background-color 0.3s ease;
+}
 
-  .sortButton input:focus button:hover {
-    background-color: #555555;
-  }
+.correctLocation {
+  background-color: #4caf50;
+}
 
-  .bar.correct {
-    background-color: #4CAF50;
-  }
-  
-  .controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 
-  
+.sortButton {
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+  font-size: 16px;
+  background-color: #333333;
+  border: 1px solid #555555;
+  border-radius: 5px;
+}
+
+.sortButton input:focus button:hover {
+  background-color: #555555;
+}
+
+.bar.correct {
+  background-color: #4caf50;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

@@ -10,6 +10,7 @@ async function fetchInsertionSortStates(arr: number[]) {
   const data = await response.json();
   return data.states;
 }
+
 const InsertionSortVisualizer = () => {
   // State to hold the sorting states
   const [sortStates, setSortStates] = useState<SortState[]>([]);
@@ -34,6 +35,8 @@ const InsertionSortVisualizer = () => {
     if (state.isPlacedCorrectLocation && index <= state.currentIndex) return 'green'; // Correctly placed
     return 'grey'; // Default color
   }
+
+  
   return (
     <div className={styles.container}>
       <h1>Insertion Sort Algoritm</h1>

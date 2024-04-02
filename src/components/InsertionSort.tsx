@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { SortState } from "@/src/models/InsertionSort/InsertionSortState";
+import { InsertionSortState } from "@/src/models/InsertionSort/InsertionSortState";
 import styles from "../styles/InsertionSort.module.css";
+import PseudoCode from "./PseudoCode";
+import { insertion_sort_pseudo } from "../models/InsertionSort/InsertionSortPseudo";
 
-async function fetchInsertionSortStates(arr: number[]) {
+async function fetchInsertionInsertionSortStates(arr: number[]) {
   const response = await fetch("http://localhost:3000/api/insertionSort", {
     method: "POST",
     body: JSON.stringify({ arr }),
@@ -13,7 +15,7 @@ async function fetchInsertionSortStates(arr: number[]) {
 
 const InsertionSortVisualizer = () => {
   // State to hold the sorting states
-  const [sortStates, setSortStates] = useState<SortState[]>([]);
+  const [InsertionSortStates, setInsertionSortStates] = useState<InsertionSortState[]>([]);
   // State to control the current displayed state
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -21,8 +23,8 @@ const InsertionSortVisualizer = () => {
 
   async function getStates() {
     const arr = inputArr.split(",").map(Number);
-    const states = await fetchInsertionSortStates(arr);
-    setSortStates(states);
+    const states = await fetchInsertionInsertionSortStates(arr);
+    setInsertionSortStates(states);
   }
 
   function handleInputChange(event: {
@@ -30,7 +32,7 @@ const InsertionSortVisualizer = () => {
   }) {
     setInputArr(event.target.value);
   }
-  function determineColor(index:number, state:SortState) {
+  function determineColor(index:number, state:InsertionSortState) {
     if (index === state.currentIndex) return 'red'; // Element being inserted
     if (state.isPlacedCorrectLocation && index <= state.currentIndex) return 'green'; // Correctly placed
     return 'grey'; // Default color
@@ -50,16 +52,16 @@ const InsertionSortVisualizer = () => {
         <button onClick={getStates}>Submit</button>
       </div>
       <div className={styles.barContainer}>
-        {sortStates[currentStep]?.currentListState.map((value, index) => (
+        {InsertionSortStates[currentStep]?.currentListState.map((value, index) => (
           <div
             className={`${styles.bar} ${
-              sortStates[currentStep].isPlacedCorrectLocation &&
-              index === sortStates[currentStep].currentIndex
+              InsertionSortStates[currentStep].isPlacedCorrectLocation &&
+              index === InsertionSortStates[currentStep].currentIndex
                 ? styles.correctLocation
                 : ""
             }`}
             key={index}
-            style={{ height: `${(value + 15) * 1.5}px`, backgroundColor: determineColor(index, sortStates[currentStep])}}
+            style={{ height: `${(value + 15) * 1.5}px`, backgroundColor: determineColor(index, InsertionSortStates[currentStep])}}
           >
             {value}
           </div>
@@ -76,7 +78,7 @@ const InsertionSortVisualizer = () => {
           className={styles.sortButton}
           onClick={() =>
             setCurrentStep(
-              currentStep < sortStates.length - 1
+              currentStep < InsertionSortStates.length - 1
                 ? currentStep + 1
                 : currentStep
             )
@@ -85,6 +87,7 @@ const InsertionSortVisualizer = () => {
           Next
         </button>
       </div>
+      <PseudoCode step={InsertionSortStates[currentStep]?.pseudocode} pseudo_code={insertion_sort_pseudo} />
     </div>
   );
 };

@@ -1,17 +1,11 @@
 .footer {
     background-color: #121212;
-    /* Change this to your desired footer color */
     display: flex;
-    /* Make footer a flex container for alignment */
     flex-direction: row;
     justify-content: space-between;
-    /* Align content horizontally with even space between */
     position: fixed;
-    /* Fix the footer to the viewport */
     bottom: 0;
-    /* Position it at the bottom */
     width: 100%;
-    /* Make it occupy the full width */
 }
 
 .footerContainer {

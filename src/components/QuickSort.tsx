@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SortState } from "@/src/models/InsertionSort/InsertionSortState";
+import { InsertionSortState } from "@/src/models/InsertionSort/InsertionSortState";
 import styles from "../styles/InsertionSort.module.css";
 
 async function fetchQuickSort(arr: number[]) {
@@ -12,7 +12,7 @@ async function fetchQuickSort(arr: number[]) {
 }
 const QuickSortVisualizer = () => {
   // State to hold the sorting states
-  const [sortStates, setSortStates] = useState<SortState[]>([]);
+  const [InsertionSortStates, setInsertionSortStates] = useState<InsertionSortState[]>([]);
   // State to control the current displayed state
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -21,7 +21,7 @@ const QuickSortVisualizer = () => {
   async function getStates() {
     const arr = inputArr.split(",").map(Number);
     const states = await fetchQuickSort(arr);
-    setSortStates(states);
+    setInsertionSortStates(states);
   }
 
   function handleInputChange(event: {
@@ -43,11 +43,11 @@ const QuickSortVisualizer = () => {
         <button onClick={getStates}>Submit</button>
       </div>
       <div className={styles.barContainer}>
-        {sortStates[currentStep]?.currentListState.map((value, index) => (
+        {InsertionSortStates[currentStep]?.currentListState.map((value, index) => (
           <div
             className={`${styles.bar} ${
-              sortStates[currentStep].isPlacedCorrectLocation &&
-              index === sortStates[currentStep].currentIndex
+              InsertionSortStates[currentStep].isPlacedCorrectLocation &&
+              index === InsertionSortStates[currentStep].currentIndex
                 ? styles.correctLocation
                 : ""
             }`}
@@ -69,7 +69,7 @@ const QuickSortVisualizer = () => {
           className={styles.sortButton}
           onClick={() =>
             setCurrentStep(
-              currentStep < sortStates.length - 1
+              currentStep < InsertionSortStates.length - 1
                 ? currentStep + 1
                 : currentStep
             )

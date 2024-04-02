@@ -1,48 +1,50 @@
 import {NextResponse} from 'next/server'
-import { SortState } from '@/src/models/InsertionSort/InsertionSortState';
-interface sort{
-    arr:number[],
-    i:number,
-    j:number,
-    currentElement:number,
-    comparisonElement:number,
-    isSorted:boolean
-}
+import { InsertionSortState } from '@/src/models/InsertionSort/InsertionSortState';
+
+/**
+ * Handles the POST request for the insertion sort route.
+ * @param req - The request object.
+ * @returns A Promise that resolves to a NextResponse containing the states of the insertion sort algorithm.
+ */
 export async function POST(req:Request){
-   let deneme:sort[]=[]
     const {arr} = await req.json()
-    console.log("IN API", arr)
-    let states:SortState[] = []
-    for (let i = 0; i < arr.length; i++) {
-      let currentElement = arr[i];
+
+    let states:InsertionSortState[] = []
     
-      let j = i - 1;
-      deneme.push({i:i,j:j,arr:[...arr],currentElement:arr[i],comparisonElement:arr[i+1],isSorted:false})   
+    for (let i = 0; i < arr.length; i++) {
+      let currentElement = arr[i]; // Copy of the current element.
+    
+      let j = i - 1; // The last element of the sorted part of the array.
+
       while (j >= 0 && arr[j] > currentElement) {
         arr[j + 1] = arr[j];
-       
         j--;
+
+        // Add the current state of the array to the states array.
         states.push({
           currentIndex: j + 1,
           currentElement: currentElement,
           currentListState: [...arr],
           isPlacedCorrectLocation: false,
+          msg: '',
+          pseudocode: 2
         });
-        deneme.push({i:i,j:j,arr:[...arr],currentElement:arr[i],comparisonElement:arr[j],isSorted:false})     
       }
-      arr[j + 1] = currentElement;
+
+      arr[j + 1] = currentElement; // Place the current element in the correct location.
+
+      // Add the current state of the array to the states array.
       states.push({
         currentIndex: i,
         currentElement: currentElement,
         currentListState: [...arr],
         isPlacedCorrectLocation: true,
+        msg: '',
+        pseudocode: 3
       });
-
-      deneme.push({i:i,j:j,arr:[...arr],currentElement:arr[i],comparisonElement:arr[i+1],isSorted:i===arr.length-1?true:false})
     }
-
     console.log("STATES", states)
-    console.log("denem states",deneme)
+
     try{
         return NextResponse.json({states: states})
     }

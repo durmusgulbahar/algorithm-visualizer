@@ -1,4 +1,3 @@
-
 export interface LinearSearchState {
   currentListState: number[];
   key: number;
@@ -7,4 +6,3 @@ export interface LinearSearchState {
   msg: string;
   pseudoCode: number;
 }
-

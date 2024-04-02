@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  justify-content: center;
+}
+
+.barContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #222222;
+  border: 2px solid #555555;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.bar {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+  padding: 20px;
+  background-color: #555;
+  transition: background-color 0.3s ease;
+}
+
+.correctLocation {
+  background-color: #4caf50;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.sortButton {
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+  font-size: 16px;
+  background-color: #333333;
+  border: 1px solid #555555;
+  border-radius: 5px;
+}
+
+.sortButton input:focus button:hover {
+  background-color: #555555;
+}
+
+.bar.correct {
+  background-color: #4caf50;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

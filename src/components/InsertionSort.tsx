@@ -32,13 +32,13 @@ const InsertionSortVisualizer = () => {
   }) {
     setInputArr(event.target.value);
   }
-  function determineColor(index:number, state:InsertionSortState) {
+  function determineColor(index: number, state: InsertionSortState) {
     if (index === state.currentIndex) return 'red'; // Element being inserted
     if (state.isPlacedCorrectLocation && index <= state.currentIndex) return 'green'; // Correctly placed
     return 'grey'; // Default color
   }
 
-  
+
   return (
     <div className={styles.container}>
       <h1>Insertion Sort Algoritm</h1>
@@ -54,14 +54,13 @@ const InsertionSortVisualizer = () => {
       <div className={styles.barContainer}>
         {InsertionSortStates[currentStep]?.currentListState.map((value, index) => (
           <div
-            className={`${styles.bar} ${
-              InsertionSortStates[currentStep].isPlacedCorrectLocation &&
-              index === InsertionSortStates[currentStep].currentIndex
+            className={`${styles.bar} ${InsertionSortStates[currentStep].isPlacedCorrectLocation &&
+                index === InsertionSortStates[currentStep].currentIndex
                 ? styles.correctLocation
                 : ""
-            }`}
+              }`}
             key={index}
-            style={{ height: `${(value + 15) * 1.5}px`, backgroundColor: determineColor(index, InsertionSortStates[currentStep])}}
+            style={{ height: `${(value + 15) * 1.5}px`, backgroundColor: determineColor(index, InsertionSortStates[currentStep]) }}
           >
             {value}
           </div>

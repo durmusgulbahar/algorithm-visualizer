@@ -3,7 +3,7 @@ export type InsertionSortState = {
   currentElement: number;
   currentListState: number[];
   isPlacedCorrectLocation: boolean;
-  msg:string
+  msg: string
   pseudocode: number;
 };
 

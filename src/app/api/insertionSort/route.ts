@@ -1,4 +1,4 @@
-import {NextResponse} from 'next/server'
+import { NextResponse } from 'next/server'
 import { InsertionSortState } from '@/src/models/InsertionSort/InsertionSortState';
 
 /**
@@ -6,50 +6,50 @@ import { InsertionSortState } from '@/src/models/InsertionSort/InsertionSortStat
  * @param req - The request object.
  * @returns A Promise that resolves to a NextResponse containing the states of the insertion sort algorithm.
  */
-export async function POST(req:Request){
-    const {arr} = await req.json()
+export async function POST(req: Request) {
+  const { arr } = await req.json()
 
-    let states:InsertionSortState[] = []
-    
-    for (let i = 0; i < arr.length; i++) {
-      let currentElement = arr[i]; // Copy of the current element.
-    
-      let j = i - 1; // The last element of the sorted part of the array.
+  let states: InsertionSortState[] = []
 
-      while (j >= 0 && arr[j] > currentElement) {
-        arr[j + 1] = arr[j];
-        j--;
+  for (let i = 0; i < arr.length; i++) {
+    let currentElement = arr[i]; // Copy of the current element.
 
-        // Add the current state of the array to the states array.
-        states.push({
-          currentIndex: j + 1,
-          currentElement: currentElement,
-          currentListState: [...arr],
-          isPlacedCorrectLocation: false,
-          msg: '',
-          pseudocode: 2
-        });
-      }
+    let j = i - 1; // The last element of the sorted part of the array.
 
-      arr[j + 1] = currentElement; // Place the current element in the correct location.
+    while (j >= 0 && arr[j] > currentElement) {
+      arr[j + 1] = arr[j];
+      j--;
 
       // Add the current state of the array to the states array.
       states.push({
-        currentIndex: i,
+        currentIndex: j + 1,
         currentElement: currentElement,
         currentListState: [...arr],
-        isPlacedCorrectLocation: true,
+        isPlacedCorrectLocation: false,
         msg: '',
-        pseudocode: 3
+        pseudocode: 2
       });
     }
-    console.log("STATES", states)
 
-    try{
-        return NextResponse.json({states: states})
-    }
-    catch(error){
-        console.log(error)
-        return NextResponse.json({message:"error", data:error})
-    }
+    arr[j + 1] = currentElement; // Place the current element in the correct location.
+
+    // Add the current state of the array to the states array.
+    states.push({
+      currentIndex: i,
+      currentElement: currentElement,
+      currentListState: [...arr],
+      isPlacedCorrectLocation: true,
+      msg: '',
+      pseudocode: 3
+    });
+  }
+  console.log("STATES", states)
+
+  try {
+    return NextResponse.json({ states: states })
+  }
+  catch (error) {
+    console.log(error)
+    return NextResponse.json({ message: "error", data: error })
+  }
 }

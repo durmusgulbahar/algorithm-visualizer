@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { InsertionSortState } from "@/src/models/InsertionSort/InsertionSortState";
 import styles from "../styles/InsertionSort.module.css";
+import PseudoCode from "./PseudoCode";
+import { quick_sort_pseudo } from "../models/QuickSort/QuickSortPseudo";
 
 async function fetchQuickSort(arr: number[]) {
   const response = await fetch("http://localhost:3000/api/quickSort", {
@@ -45,12 +47,11 @@ const QuickSortVisualizer = () => {
       <div className={styles.barContainer}>
         {InsertionSortStates[currentStep]?.currentListState.map((value, index) => (
           <div
-            className={`${styles.bar} ${
-              InsertionSortStates[currentStep].isPlacedCorrectLocation &&
-              index === InsertionSortStates[currentStep].currentIndex
+            className={`${styles.bar} ${InsertionSortStates[currentStep].isPlacedCorrectLocation &&
+                index === InsertionSortStates[currentStep].currentIndex
                 ? styles.correctLocation
                 : ""
-            }`}
+              }`}
             key={index}
             style={{ height: `${(value + 15) * 1.5}px` }}
           >
@@ -78,6 +79,7 @@ const QuickSortVisualizer = () => {
           Next
         </button>
       </div>
+      <PseudoCode pseudo_code={quick_sort_pseudo} step={InsertionSortStates[currentStep]?.pseudocode} />
     </div>
   );
 };

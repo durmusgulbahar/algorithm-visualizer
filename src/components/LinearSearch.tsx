@@ -3,7 +3,7 @@ import styles from "@/src/styles/InsertionSort.module.css";
 import { useState } from "react";
 import { LinearSearchState } from "../models/linearSearch/LinearSearchState";
 import PseudoCode from "./PseudoCode";
-import { linear_pseudo} from "../models/linearSearch/LinearSearchPseudo";
+import { linear_pseudo } from "../models/linearSearch/LinearSearchPseudo";
 
 async function fetchLinearSearch(arr: number[], key: number) {
   const response = await fetch("http://localhost:3000/api/linearSearch", {
@@ -146,7 +146,7 @@ export default function LinearSearchVisualizer() {
           }}
         >
           {!sortStates[currentStep]?.isFound &&
-          currentStep === sortStates.length - 1
+            currentStep === sortStates.length - 1
             ? `Key not found in the array`
             : sortStates[currentStep]?.msg}
         </p>

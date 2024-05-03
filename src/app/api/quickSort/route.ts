@@ -1,13 +1,6 @@
 import { NextResponse } from "next/server";
-//import { QuickSortState } from '@/src/models/QuickSort/QuickSortState';
-interface QuickSortState {
-  currentListState: number[];
-  currentIndex: number;
-  currentElement: number;
-  leftPointer: number;
-  rightPointer: number;
-  status: "pivot" | "compare" | "sorted";
-}
+import { QuickSortState } from '@/src/models/QuickSort/QuickSortState';
+
 export async function POST(req: Request) {
   const { arr } = await req.json();
   console.log("IN API", arr);
@@ -15,16 +8,19 @@ export async function POST(req: Request) {
 
   quickSort(arr, 0, arr.length - 1);
 
+  // Function to swap two elements in the array
   function swap(items: number[], leftIndex: number, rightIndex: number) {
     let temp = items[leftIndex];
     items[leftIndex] = items[rightIndex];
     items[rightIndex] = temp;
   }
 
+  // Function to find the partition index
   function partition(items: number[], left: number, right: number) {
-    let pivot = items[Math.floor((right + left) / 2)], //middle element
-      i = left, //left pointer
-      j = right; //right pointer
+    let pivot = items[Math.floor((right + left) / 2)], // middle element
+      i = left, // left pointer
+      j = right; // right pointer
+
     states.push({
       currentIndex: Math.floor((right + left) / 2),
       currentElement: pivot,
@@ -32,16 +28,23 @@ export async function POST(req: Request) {
       leftPointer: i,
       rightPointer: j,
       status: "pivot",
+      msg: "",
+      pseudoCode: 0
     });
+
+    // While left pointer is less than right pointer
     while (i <= j) {
-      while (items[i] < pivot) {
+      while (items[i] < pivot) { // if the element is less than the pivot
         i++;
       }
-      while (items[j] > pivot) {
+
+      while (items[j] > pivot) { // if the element is greater than the pivot
         j--;
       }
-      if (i <= j) {
-        swap(items, i, j); //swap two elements
+
+      if (i <= j) { // if the left pointer is less than or equal to the right pointer
+        swap(items, i, j);
+
         states.push({
           currentIndex: Math.floor((right + left) / 2),
           currentElement: pivot,
@@ -49,7 +52,10 @@ export async function POST(req: Request) {
           leftPointer: i,
           rightPointer: j,
           status: "pivot",
+          msg: "",
+          pseudoCode: 1
         });
+
         i++;
         j--;
       }
@@ -72,7 +78,9 @@ export async function POST(req: Request) {
     }
     return items;
   }
-console.log("STATES", states);
+
+  console.log("STATES", states);
+
   try {
     return NextResponse.json({ states: states });
   } catch (error) {

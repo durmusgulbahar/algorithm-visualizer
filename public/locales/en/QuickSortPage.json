@@ -1,0 +1,12 @@
+{
+    "header": "Quicksort Algorithm",
+    "pseudocode": {
+        "line1": "for each (unsorted) partition",
+        "line2": "set first element as pivot",
+        "line3": "storeIndex = pivotIndex+1",
+        "line4": "for i = pivotIndex+1 to rightmostIndex",
+        "line5": "if ((a[i] < a[pivot]) or (equal but 50% lucky))",
+        "line6": "swap(i, storeIndex); ++storeIndex",
+        "line7": "swap(pivot, storeIndex-1)"
+    }
+}

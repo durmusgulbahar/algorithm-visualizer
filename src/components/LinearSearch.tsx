@@ -4,6 +4,7 @@ import { useState } from "react";
 import { LinearSearchState } from "../models/linearSearch/LinearSearchState";
 import PseudoCode from "./PseudoCode";
 import { linear_pseudo } from "../models/linearSearch/LinearSearchPseudo";
+import { useTranslation } from "next-i18next";
 
 async function fetchLinearSearch(arr: number[], key: number) {
   const response = await fetch("http://localhost:3000/api/linearSearch", {
@@ -14,6 +15,7 @@ async function fetchLinearSearch(arr: number[], key: number) {
   return data.states;
 }
 export default function LinearSearchVisualizer() {
+  const { t } = useTranslation(["LinearSearchPage", "buttonsAndPlaceholders"]); // For translation
   // State to hold the sorting states
   const [sortStates, setSortStates] = useState<LinearSearchState[]>([]);
   // State to control the current displayed state
@@ -80,7 +82,7 @@ export default function LinearSearchVisualizer() {
           justifyContent: "center",
         }}
       >
-        <h1>Linear Search</h1>
+        <h1> {t("LinearSearchPage:header")} </h1>
         <div className="inputArea">
           <input
             type="text"
@@ -94,7 +96,7 @@ export default function LinearSearchVisualizer() {
             value={key}
             onChange={handleInputChangeKey}
           />
-          <button onClick={getStates}>Submit</button>
+          <button onClick={getStates}>{t("buttonsAndPlaceholders:submit")}</button>
         </div>
 
         <div>
@@ -122,7 +124,7 @@ export default function LinearSearchVisualizer() {
               setCurrentStep(currentStep > 0 ? currentStep - 1 : 0)
             }
           >
-            Previous
+            {t("buttonsAndPlaceholders:previous")}
           </button>
           <button
             className={styles.sortButton}
@@ -134,7 +136,7 @@ export default function LinearSearchVisualizer() {
               )
             }
           >
-            Next
+            {t("buttonsAndPlaceholders:next")}
           </button>
           <br />
         </div>

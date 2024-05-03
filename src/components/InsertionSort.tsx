@@ -3,6 +3,8 @@ import { InsertionSortState } from "@/src/models/InsertionSort/InsertionSortStat
 import styles from "../styles/InsertionSort.module.css";
 import PseudoCode from "./PseudoCode";
 import { insertion_sort_pseudo } from "../models/InsertionSort/InsertionSortPseudo";
+import { useTranslation } from "next-i18next";
+
 
 async function fetchInsertionInsertionSortStates(arr: number[]) {
   const response = await fetch("http://localhost:3000/api/insertionSort", {
@@ -14,6 +16,7 @@ async function fetchInsertionInsertionSortStates(arr: number[]) {
 }
 
 const InsertionSortVisualizer = () => {
+  const { t } = useTranslation(["InsertionSortPage", "buttonsAndPlaceholders"]); // For translation
   // State to hold the sorting states
   const [InsertionSortStates, setInsertionSortStates] = useState<InsertionSortState[]>([]);
   // State to control the current displayed state
@@ -41,15 +44,15 @@ const InsertionSortVisualizer = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Insertion Sort Algoritm</h1>
+      <h1>{t("InsertionSortPage:header")}</h1>
       <div className="inputArea">
         <input
           type="text"
-          placeholder="Enter input..."
+          placeholder= {t("buttonsAndPlaceholders:placeholder")}
           value={inputArr}
           onChange={handleInputChange}
         />
-        <button onClick={getStates}>Submit</button>
+        <button onClick={getStates}> {t("buttonsAndPlaceholders:submit")} </button>
       </div>
       <div className={styles.barContainer}>
         {InsertionSortStates[currentStep]?.currentListState.map((value, index) => (
@@ -71,7 +74,7 @@ const InsertionSortVisualizer = () => {
           className={styles.sortButton}
           onClick={() => setCurrentStep(currentStep > 0 ? currentStep - 1 : 0)}
         >
-          Previous
+          {t("buttonsAndPlaceholders:previous")}
         </button>
         <button
           className={styles.sortButton}
@@ -83,7 +86,7 @@ const InsertionSortVisualizer = () => {
             )
           }
         >
-          Next
+          {t("buttonsAndPlaceholders:next")}
         </button>
       </div>
       <PseudoCode step={InsertionSortStates[currentStep]?.pseudocode} pseudo_code={insertion_sort_pseudo} />

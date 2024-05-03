@@ -3,6 +3,7 @@ import { InsertionSortState } from "@/src/models/InsertionSort/InsertionSortStat
 import styles from "../styles/InsertionSort.module.css";
 import PseudoCode from "./PseudoCode";
 import { quick_sort_pseudo } from "../models/QuickSort/QuickSortPseudo";
+import { useTranslation } from 'next-i18next'
 
 async function fetchQuickSort(arr: number[]) {
   const response = await fetch("http://localhost:3000/api/quickSort", {
@@ -13,6 +14,7 @@ async function fetchQuickSort(arr: number[]) {
   return data.states;
 }
 const QuickSortVisualizer = () => {
+  const { t } = useTranslation(["QuickSortPage", "buttonsAndPlaceholders"]); // For translation
   // State to hold the sorting states
   const [InsertionSortStates, setInsertionSortStates] = useState<InsertionSortState[]>([]);
   // State to control the current displayed state
@@ -34,7 +36,7 @@ const QuickSortVisualizer = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Quick Sort Algoritm</h1>
+      <h1> {t("QuickSortPage:header")} </h1>
       <div className="inputArea">
         <input
           type="text"
@@ -42,7 +44,7 @@ const QuickSortVisualizer = () => {
           value={inputArr}
           onChange={handleInputChange}
         />
-        <button onClick={getStates}>Submit</button>
+        <button onClick={getStates}> {t("buttonsAndPlaceholders:submit")} </button>
       </div>
       <div className={styles.barContainer}>
         {InsertionSortStates[currentStep]?.currentListState.map((value, index) => (
@@ -64,7 +66,7 @@ const QuickSortVisualizer = () => {
           className={styles.sortButton}
           onClick={() => setCurrentStep(currentStep > 0 ? currentStep - 1 : 0)}
         >
-          Previous
+          {t("buttonsAndPlaceholders:previous")}
         </button>
         <button
           className={styles.sortButton}
@@ -76,7 +78,7 @@ const QuickSortVisualizer = () => {
             )
           }
         >
-          Next
+          {t("buttonsAndPlaceholders:next")}
         </button>
       </div>
       <PseudoCode pseudo_code={quick_sort_pseudo} step={InsertionSortStates[currentStep]?.pseudocode} />

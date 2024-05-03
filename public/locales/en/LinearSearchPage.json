@@ -1,0 +1,7 @@
+{
+    "header": "Linear Search",
+    "pseudocode": {
+        "line1": "for (let i = 0; i < arr.length; i++)",
+        "line2": "if(arr[i] === key) return i"
+    }
+}

@@ -20,7 +20,7 @@ export async function POST(req: Request) {
         currentIndex: i,
         currentListState: [...arr],
         isFound: true,
-        msg: ` ${key} found at index ${i} `,
+        msg: ` ${key} (key) found at index ${i} `,
         pseudoCode: 1,
       });
       break;
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       key: key,
       currentListState: [...arr],
       isFound: false,
-      msg: `${key} compared with index ${i} (${arr[i]})`,
+      msg: `${key} (key) compared with index ${i} (${arr[i]})`,
       pseudoCode: 0,
     });
   }

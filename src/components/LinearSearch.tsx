@@ -2,16 +2,16 @@
 import styles from "@/src/styles/InsertionSort.module.css";
 import { useState } from "react";
 import { LinearSearchState } from "../models/linearSearch/LinearSearchState";
-import PseudoCode from "./PseudoCode";
-import { linear_pseudo } from "../models/linearSearch/LinearSearchPseudo";
 
+import { linear_pseudo } from "../models/linearSearch/LinearSearchPseudo";
+import { getLinearSearch } from "../services/getLinearSearch";
+import ExplainBox from "./ExplainBox";
+import RightSide from "./RightSide";
 async function fetchLinearSearch(arr: number[], key: number) {
-  const response = await fetch("http://localhost:3000/api/linearSearch", {
-    method: "POST",
-    body: JSON.stringify({ arr, key }),
-  });
-  const data = await response.json();
-  return data.states;
+ 
+  const data = await getLinearSearch(arr, key);
+  const states = await data.json();
+  return states.states;
 }
 export default function LinearSearchVisualizer() {
   // State to hold the sorting states
@@ -140,9 +140,11 @@ export default function LinearSearchVisualizer() {
         </div>
         <p
           style={{
-            color: sortStates[currentStep]?.isFound ? "green" : "red",
+            color: currentStep == 0 ? "white" : sortStates[currentStep]?.isFound ? "green" : "red",
             fontSize: "20px",
-            fontWeight: "bold",
+          
+            width: "60%",
+            textAlign: "center",
           }}
         >
           {!sortStates[currentStep]?.isFound &&
@@ -151,7 +153,8 @@ export default function LinearSearchVisualizer() {
             : sortStates[currentStep]?.msg}
         </p>
       </div>
-      <PseudoCode step={sortStates[currentStep]?.pseudoCode} pseudo_code={linear_pseudo} />
+
+      <RightSide step={sortStates[currentStep]?.pseudoCode} pseudo_code={linear_pseudo} />
     </div>
   );
 }

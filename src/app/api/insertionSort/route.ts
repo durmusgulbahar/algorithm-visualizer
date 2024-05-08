@@ -26,7 +26,7 @@ export async function POST(req: Request) {
         currentElement: currentElement,
         currentListState: [...arr],
         isPlacedCorrectLocation: false,
-        msg: '',
+        msg: ``,
         pseudocode: 2
       });
     }
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       currentListState: [...arr],
       isPlacedCorrectLocation: true,
       msg: '',
-      pseudocode: 3
+      pseudocode: 0
     });
   }
   console.log("STATES", states)

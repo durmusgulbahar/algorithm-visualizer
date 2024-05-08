@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { InsertionSortState } from "@/src/models/InsertionSort/InsertionSortState";
-import styles from "../styles/InsertionSort.module.css";
+import React, { useState } from "react";
+import { QuickSortState } from "@/src/models/QuickSort/QuickSortState";
+import styles from "../styles/QuickSort.module.css";
 import PseudoCode from "./PseudoCode";
 import { quick_sort_pseudo } from "../models/QuickSort/QuickSortPseudo";
 
@@ -12,74 +12,75 @@ async function fetchQuickSort(arr: number[]) {
   const data = await response.json();
   return data.states;
 }
-const QuickSortVisualizer = () => {
-  // State to hold the sorting states
-  const [InsertionSortStates, setInsertionSortStates] = useState<InsertionSortState[]>([]);
-  // State to control the current displayed state
-  const [currentStep, setCurrentStep] = useState(0);
 
+const QuickSortVisualizer = () => {
+  const [quickSortStates, setQuickSortStates] = useState<QuickSortState[]>([]);
+  const [currentStep, setCurrentStep] = useState(0);
   const [inputArr, setInputArr] = useState("");
 
   async function getStates() {
     const arr = inputArr.split(",").map(Number);
     const states = await fetchQuickSort(arr);
-    setInsertionSortStates(states);
+    setQuickSortStates(states);
   }
 
-  function handleInputChange(event: {
-    target: { value: React.SetStateAction<string> };
-  }) {
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setInputArr(event.target.value);
   }
 
   return (
     <div className={styles.container}>
-      <h1>Quick Sort Algoritm</h1>
-      <div className="inputArea">
+      <h1>Quick Sort Algorithm</h1>
+      <div className={styles.inputArea}>
         <input
           type="text"
-          placeholder="Enter input..."
+          placeholder="Enter numbers separated by commas..."
           value={inputArr}
           onChange={handleInputChange}
         />
         <button onClick={getStates}>Submit</button>
       </div>
       <div className={styles.barContainer}>
-        {InsertionSortStates[currentStep]?.currentListState.map((value, index) => (
-          <div
-            className={`${styles.bar} ${InsertionSortStates[currentStep].isPlacedCorrectLocation &&
-                index === InsertionSortStates[currentStep].currentIndex
-                ? styles.correctLocation
-                : ""
-              }`}
-            key={index}
-            style={{ height: `${(value + 15) * 1.5}px` }}
-          >
-            {value}
-          </div>
-        ))}
+        {quickSortStates[currentStep]?.currentListState.map((value, index) => {
+          let barStyle = styles.bar;
+          if (index === quickSortStates[currentStep].currentIndex && quickSortStates[currentStep].status === "pivot") {
+            barStyle = `${styles.bar} ${styles.pivot}`;
+          } else if (quickSortStates[currentStep].status === "sorted") {
+            barStyle = `${styles.bar} ${styles.sorted}`;
+          } else if (quickSortStates[currentStep].status === "swap") {
+            barStyle = `${styles.bar} ${styles.swap}`;
+          } else if (quickSortStates[currentStep].status === "compare") {
+            barStyle = `${styles.bar} ${styles.compare}`;
+          }
+
+          return (
+            <div
+              className={barStyle}
+              key={index}
+              style={{ height: `${(value + 15) * 1.5}px` }}
+            >
+              {value}
+            </div>
+          );
+        })}
       </div>
       <div className={styles.buttonContainer}>
         <button
+          disabled={currentStep <= 0}
           className={styles.sortButton}
-          onClick={() => setCurrentStep(currentStep > 0 ? currentStep - 1 : 0)}
+          onClick={() => setCurrentStep(currentStep - 1)}
         >
           Previous
         </button>
         <button
+          disabled={currentStep >= quickSortStates.length - 1}
           className={styles.sortButton}
-          onClick={() =>
-            setCurrentStep(
-              currentStep < InsertionSortStates.length - 1
-                ? currentStep + 1
-                : currentStep
-            )
-          }
+          onClick={() => setCurrentStep(currentStep + 1)}
         >
           Next
         </button>
       </div>
-      <PseudoCode pseudo_code={quick_sort_pseudo} step={InsertionSortStates[currentStep]?.pseudocode} />
+      <PseudoCode pseudo_code={quick_sort_pseudo} step={quickSortStates[currentStep]?.pseudoCode} />
     </div>
   );
 };

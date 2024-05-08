@@ -1,10 +1,10 @@
 export interface QuickSortState {
   currentListState: number[];
-  currentIndex: number;
-  currentElement: number;
-  leftPointer: number;
-  rightPointer: number;
-  status: "pivot" | "compare" | "sorted";
+  currentIndex: number | null;
+  currentElement: number | null;
+  leftPointer: number | null;
+  rightPointer: number | null;
+  status: "pivot" | "compare" | "sorted" | "swap";
   msg: string;
   pseudoCode: number;
 }

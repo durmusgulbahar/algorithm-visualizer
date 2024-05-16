@@ -8,7 +8,6 @@ import { getLinearSearch } from "../services/getLinearSearch";
 import ExplainBox from "./ExplainBox";
 import RightSide from "./RightSide";
 async function fetchLinearSearch(arr: number[], key: number) {
- 
   const data = await getLinearSearch(arr, key);
   const states = await data.json();
   return states.states;
@@ -140,21 +139,31 @@ export default function LinearSearchVisualizer() {
         </div>
         <p
           style={{
-            color: currentStep == 0 ? "white" : sortStates[currentStep]?.isFound ? "green" : "red",
+            color:
+              currentStep == 0
+                ? "white"
+                : sortStates[currentStep]?.isFound
+                ? "green"
+                : "red",
             fontSize: "20px",
-          
+
             width: "60%",
             textAlign: "center",
           }}
         >
           {!sortStates[currentStep]?.isFound &&
-            currentStep === sortStates.length - 1
+          currentStep === sortStates.length - 1
             ? `Key not found in the array`
             : sortStates[currentStep]?.msg}
         </p>
       </div>
 
-      <RightSide step={sortStates[currentStep]?.pseudoCode} pseudo_code={linear_pseudo} />
+      <RightSide
+        text="Linear search is a straightforward method for finding a specific item in a list. It works by checking each item in the list one at a time, from the beginning to the end, until the desired item is found or the end of the list is reached."
+        complexity="O(N)"
+        step={sortStates[currentStep]?.pseudoCode}
+        pseudo_code={linear_pseudo}
+      />
     </div>
   );
 }

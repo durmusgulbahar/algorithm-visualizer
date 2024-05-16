@@ -5,9 +5,13 @@ import { PseudoCode } from "../models/PseudoCode";
 export default function RightSide({
   step,
   pseudo_code,
+  complexity,
+  text,
 }: {
   step: number;
   pseudo_code: PseudoCode;
+  complexity: string;
+  text: string;
 }) {
   return (
     <div
@@ -19,14 +23,14 @@ export default function RightSide({
         position: "absolute",
         zIndex: 1,
         top: "10%",
-        right: "10px",
+        right: "10px",  
         border: "1px solid white",
         width: "20%",
       }}
     >
-      <ExplainBox />
+      <ExplainBox text={text}/>
       <p style={{ fontWeight: "bold" }}>
-        TIME COMPLEXITY: <span style={{ fontWeight: "normal" }}>O(N)</span>
+        TIME COMPLEXITY: <span style={{ fontWeight: "normal" }}>{complexity}</span>
         <a target="_blank" style={
             {
                 color: "white",

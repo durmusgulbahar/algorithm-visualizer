@@ -41,7 +41,7 @@ const InsertionSortVisualizer = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Insertion Sort Algoritm</h1>
+      <h1>Insertion Sort Algorithm</h1>
       <div className="inputArea">
         <input
           type="text"
@@ -51,6 +51,31 @@ const InsertionSortVisualizer = () => {
         />
         <button onClick={getStates}>Submit</button>
       </div>
+      <div className={styles.barContainer}>
+        {InsertionSortStates[currentStep]?.currentListState.map(
+          (value, index) => (
+            <div
+              className={`${styles.bar} ${
+                InsertionSortStates[currentStep].isPlacedCorrectLocation &&
+                index === InsertionSortStates[currentStep].currentIndex
+                  ? styles.correctLocation
+                  : ""
+              }`}
+              key={index}
+              style={{
+                height: `${(value + 15) * 1.5}px`,
+                backgroundColor: determineColor(
+                  index,
+                  InsertionSortStates[currentStep]
+                ),
+              }}
+            >
+              {value}
+            </div>
+          )
+        )}
+      </div>
+      
       <div className={styles.barContainer}>
         {InsertionSortStates[currentStep]?.currentListState.map(
           (value, index) => (
@@ -96,7 +121,7 @@ const InsertionSortVisualizer = () => {
         </button>
         <p>{InsertionSortStates[currentStep]?.msg}</p>
       </div>
-      <RightSide step={InsertionSortStates[currentStep]?.pseudocode} pseudo_code={insertion_sort_pseudo} />
+      <RightSide text="Insertion sort iterates through an array, comparing each element with its neighbor and swapping them if they are in the wrong order." complexity="O(N^2)" step={InsertionSortStates[currentStep]?.pseudocode} pseudo_code={insertion_sort_pseudo} />
     </div>
   );
 };

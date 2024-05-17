@@ -1,0 +1,10 @@
+{
+    "header": "Insertion Sort Algoritması",
+    "pseudo_code": {
+        "line1": "İlk elemanı sıralı kabul et ve lastSortedIndex=0 yap",
+        "line2": "her bir sıralanmamış x eleman için",
+        "line3": "j = lastSortedIndex'den 0'a kadar",
+        "line4": "eğer mevcut eleman > x ise, taşı",
+        "line5": "döngüyü kır ve X'i ekle"
+    }
+}

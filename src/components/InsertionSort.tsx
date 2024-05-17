@@ -4,24 +4,25 @@ import styles from "../styles/InsertionSort.module.css";
 import { insertion_sort_pseudo } from "../models/InsertionSort/InsertionSortPseudo";
 import { getInsertionSort } from "../services/getInsertionSort";
 import RightSide from "./RightSide";
-import { useTranslation } from "next-i18next";
+import i18next from 'i18next';
+import { initReactI18next } from "react-i18next";
+import pageEN from "../../public/locales/en/page.json";
+import pageTR from "../../public/locales/tr/page.json";
+import InsertionSortPageTR from "../../public/locales/tr/InsertionSortPage.json";
+import InsertionSortPageEN from "../../public/locales/en/InsertionSortPage.json";
+import buttonsAndPlaceholdersEN from "../../public/locales/en/buttonsAndPlaceholders.json";
+import buttonsAndPlaceholdersTR from "../../public/locales/tr/buttonsAndPlaceholders.json";
 
-const InsertionSortVisualizer = () => {
-
-const [error, setError] = useState<string>('');
-
-const validateInput = (value: string): boolean => {
-  const pattern = /^(\d+(,\d+)*)?$/;
-  return pattern.test(value);
-};
-
-const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  if (validateInput(inputArr)) {
-    setError('');
-    await getStates(); // Call getStates if input is valid
-  } else {
-    setError('Please enter a valid array of numbers separated by commas.');
+const resources = {
+  en: {
+    page: pageEN, 
+    InsertionSortPage: InsertionSortPageEN,
+    buttonsAndPlaceholders: buttonsAndPlaceholdersEN
+  },
+  tr: {
+    page: pageTR,
+    InsertionSortPage: InsertionSortPageTR,
+    buttonsAndPlaceholders: buttonsAndPlaceholdersTR
   }
 };
 
@@ -31,8 +32,35 @@ async function fetchInsertionSortStates(arr: number[]) {
   return states.states;
 }
 
+i18next
+  .use(initReactI18next)
+  .init({
+    fallbackLng: ['en', 'tr'],
+    resources,
+    debug: true
+}, (err, t) => {
+  if (err) return console.log('something went wrong loading', err);
+});
+
 const InsertionSortVisualizer = () => {
-  const { t } = useTranslation(["InsertionSortPage", "buttonsAndPlaceholders"]); // For translation
+
+  const [error, setError] = useState<string>('');
+
+  const validateInput = (value: string): boolean => {
+    const pattern = /^(\d+(,\d+)*)?$/;
+    return pattern.test(value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (validateInput(inputArr)) {
+      setError('');
+      await getStates(); // Call getStates if input is valid
+    } else {
+      setError('Please enter a valid array of numbers separated by commas.');
+    }
+  };
+
   // State to hold the sorting states
   const [InsertionSortStates, setInsertionSortStates] = useState<
     InsertionSortState[]
@@ -63,7 +91,7 @@ const InsertionSortVisualizer = () => {
 
   return (
     <div className={styles.container}>
-      <h1>{t("InsertionSortPage:header")}</h1>
+      <h1>{i18next.t('InsertionSortPage:header')}</h1>
       <div className="inputArea">
         <form onSubmit={handleSubmit}>
           <input
@@ -130,7 +158,7 @@ const InsertionSortVisualizer = () => {
           className={styles.sortButton}
           onClick={() => setCurrentStep(currentStep > 0 ? currentStep - 1 : 0)}
         >
-          {t("buttonsAndPlaceholders:previous")}
+          {i18next.t("buttonsAndPlaceholders:previous")}
         </button>
         <button
           className={styles.sortButton}
@@ -142,7 +170,7 @@ const InsertionSortVisualizer = () => {
             )
           }
         >
-          {t("buttonsAndPlaceholders:next")}
+          {i18next.t("buttonsAndPlaceholders:next")}
         </button>
         <p>{InsertionSortStates[currentStep]?.msg}</p>
       </div>

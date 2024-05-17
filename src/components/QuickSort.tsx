@@ -14,6 +14,24 @@ async function fetchQuickSort(arr: number[]) {
 }
 
 const QuickSortVisualizer = () => {
+
+  const [error, setError] = useState<string>('');
+
+  const validateInput = (value: string): boolean => {
+    const pattern = /^(\d+(,\d+)*)?$/;
+    return pattern.test(value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (validateInput(inputArr)) {
+      setError('');
+      await getStates(); // Call getStates if input is valid
+    } else {
+      setError('Please enter a valid array of numbers separated by commas.');
+    }
+  };
+
   const [quickSortStates, setQuickSortStates] = useState<QuickSortState[]>([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [inputArr, setInputArr] = useState("");
@@ -32,12 +50,19 @@ const QuickSortVisualizer = () => {
     <div className={styles.container}>
       <h1>Quick Sort Algorithm</h1>
       <div className={styles.inputArea}>
-        <input
-          type="text"
-          placeholder="Enter numbers separated by commas..."
-          value={inputArr}
-          onChange={handleInputChange}
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            id="numberArray"
+            placeholder="Enter input..."
+            value={inputArr}
+            onChange={handleInputChange}
+            pattern="^(\d+(,\d+)*)?$"
+            required
+          />
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <button type="submit" onClick={getStates}>Submit</button>
+        </form>
         <button onClick={getStates}>Submit</button>
       </div>
       <div className={styles.barContainer}>

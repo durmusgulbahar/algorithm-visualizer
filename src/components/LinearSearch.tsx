@@ -13,6 +13,23 @@ async function fetchLinearSearch(arr: number[], key: number) {
   return states.states;
 }
 export default function LinearSearchVisualizer() {
+
+  const [error, setError] = useState<string>('');
+
+  const validateInput = (value: string): boolean => {
+    const pattern = /^(\d+(,\d+)*)?$/;
+    return pattern.test(value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (validateInput(inputArr)) {
+      setError('');
+      await getStates(); // Call getStates if input is valid
+    } else {
+      setError('Please enter a valid array of numbers separated by commas.');
+    }
+  };
   // State to hold the sorting states
   const [sortStates, setSortStates] = useState<LinearSearchState[]>([]);
   // State to control the current displayed state
@@ -81,14 +98,21 @@ export default function LinearSearchVisualizer() {
       >
         <h1>Linear Search</h1>
         <div className="inputArea">
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              id="numberArray"
+              placeholder="Enter input..."
+              value={inputArr}
+              onChange={handleInputChange}
+              pattern="^(\d+(,\d+)*)?$"
+              required
+            />
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <button type="submit" onClick={getStates}>Submit</button>
+          </form>
           <input
-            type="text"
-            placeholder="Enter the array..."
-            value={inputArr}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
+            type="number"
             placeholder="Enter the key..."
             value={key}
             onChange={handleInputChangeKey}
@@ -143,8 +167,8 @@ export default function LinearSearchVisualizer() {
               currentStep == 0
                 ? "white"
                 : sortStates[currentStep]?.isFound
-                ? "green"
-                : "red",
+                  ? "green"
+                  : "red",
             fontSize: "20px",
 
             width: "60%",
@@ -152,7 +176,7 @@ export default function LinearSearchVisualizer() {
           }}
         >
           {!sortStates[currentStep]?.isFound &&
-          currentStep === sortStates.length - 1
+            currentStep === sortStates.length - 1
             ? `Key not found in the array`
             : sortStates[currentStep]?.msg}
         </p>

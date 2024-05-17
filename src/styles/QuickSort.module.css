@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    justify-content: center;
+  }
+.inputArea {
+    margin-bottom: 20px;
+}
+
+.inputArea input {
+    padding: 8px;
+    font-size: 16px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.inputArea button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.inputArea button:hover {
+    background-color: #45a049;
+}
+
+.barContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #222222;
+    border: 2px solid #555555;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.bar {
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: white;
+    padding: 20px;
+    background-color: #555;
+    transition: background-color 0.3s ease;
+}
+
+.bar.sorted {
+    background-color: #4CAF50; /* Green for sorted elements */
+}
+
+.bar.pivot {
+    background-color: #f44336; /* Red for the pivot element */
+}
+
+.bar.swap {
+    background-color: #FFD700; /* Gold for elements being swapped */
+}
+
+.bar.compare {
+    background-color: #FF8C00; /* Dark orange for elements being compared */
+}
+
+.buttonContainer {
+    margin-top: 20px;
+}
+
+.sortButton {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.sortButton:hover {
+    background-color: #007ba7;
+}
+
+.sortButton:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}

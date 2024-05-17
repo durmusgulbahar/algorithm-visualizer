@@ -11,16 +11,10 @@ export default function PseudoCodeComponent({
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        padding: "20px",
-        position: "absolute",
-        zIndex: 1,
-        bottom: "10%",
-        right: "10px",
-        border: "1px solid white",
+       
       }}
     >
+      
       <div>
         {Object.keys(pseudo_code.pseudo_code).map((key) => {
           return step === parseInt(key) ? (

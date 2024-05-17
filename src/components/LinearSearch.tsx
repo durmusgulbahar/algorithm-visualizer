@@ -3,19 +3,37 @@ import styles from "@/src/styles/InsertionSort.module.css";
 import { useState } from "react";
 import { LinearSearchState } from "../models/linearSearch/LinearSearchState";
 import PseudoCode from "./PseudoCode";
-import { linear_pseudo } from "../models/linearSearch/LinearSearchPseudo";
 import { useTranslation } from "next-i18next";
+import { linear_pseudo } from "../models/linearSearch/LinearSearchPseudo";
+import { getLinearSearch } from "../services/getLinearSearch";
+import ExplainBox from "./ExplainBox";
+import RightSide from "./RightSide";
 
 async function fetchLinearSearch(arr: number[], key: number) {
-  const response = await fetch("http://localhost:3000/api/linearSearch", {
-    method: "POST",
-    body: JSON.stringify({ arr, key }),
-  });
-  const data = await response.json();
-  return data.states;
+  const data = await getLinearSearch(arr, key);
+  const states = await data.json();
+  return states.states;
 }
 export default function LinearSearchVisualizer() {
-  const { t } = useTranslation(["LinearSearchPage", "buttonsAndPlaceholders"]); // For translation
+
+  const [error, setError] = useState<string>('');
+
+  const validateInput = (value: string): boolean => {
+    const pattern = /^(\d+(,\d+)*)?$/;
+    return pattern.test(value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (validateInput(inputArr)) {
+      setError('');
+      await getStates(); // Call getStates if input is valid
+    } else {
+      setError('Please enter a valid array of numbers separated by commas.');
+    }
+  };
+
+    const { t } = useTranslation(["LinearSearchPage", "buttonsAndPlaceholders"]); // For translation
   // State to hold the sorting states
   const [sortStates, setSortStates] = useState<LinearSearchState[]>([]);
   // State to control the current displayed state
@@ -84,14 +102,21 @@ export default function LinearSearchVisualizer() {
       >
         <h1> {t("LinearSearchPage:header")} </h1>
         <div className="inputArea">
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              id="numberArray"
+              placeholder="Enter input..."
+              value={inputArr}
+              onChange={handleInputChange}
+              pattern="^(\d+(,\d+)*)?$"
+              required
+            />
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <button type="submit" onClick={getStates}>Submit</button>
+          </form>
           <input
-            type="text"
-            placeholder="Enter the array..."
-            value={inputArr}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
+            type="number"
             placeholder="Enter the key..."
             value={key}
             onChange={handleInputChangeKey}
@@ -142,9 +167,16 @@ export default function LinearSearchVisualizer() {
         </div>
         <p
           style={{
-            color: sortStates[currentStep]?.isFound ? "green" : "red",
+            color:
+              currentStep == 0
+                ? "white"
+                : sortStates[currentStep]?.isFound
+                  ? "green"
+                  : "red",
             fontSize: "20px",
-            fontWeight: "bold",
+
+            width: "60%",
+            textAlign: "center",
           }}
         >
           {!sortStates[currentStep]?.isFound &&
@@ -153,7 +185,13 @@ export default function LinearSearchVisualizer() {
             : sortStates[currentStep]?.msg}
         </p>
       </div>
-      <PseudoCode step={sortStates[currentStep]?.pseudoCode} pseudo_code={linear_pseudo} />
+
+      <RightSide
+        text="Linear search is a straightforward method for finding a specific item in a list. It works by checking each item in the list one at a time, from the beginning to the end, until the desired item is found or the end of the list is reached."
+        complexity="O(N)"
+        step={sortStates[currentStep]?.pseudoCode}
+        pseudo_code={linear_pseudo}
+      />
     </div>
   );
 }

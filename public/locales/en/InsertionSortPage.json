@@ -1,0 +1,10 @@
+{
+    "header": "Insertion Sort Algorithm",
+    "pseudo_code": {
+        "line1": "Mark first element as sorted",
+        "line2": "for each unsorted element X",
+        "line3": "for j=0 lastSortedIndex down to 0",
+        "line4": "if current element > x, move",
+        "line5": "break loop and insert X"
+    }
+}

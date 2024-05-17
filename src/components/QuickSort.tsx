@@ -3,6 +3,7 @@ import { QuickSortState } from "@/src/models/QuickSort/QuickSortState";
 import styles from "../styles/QuickSort.module.css";
 import PseudoCode from "./PseudoCode";
 import { quick_sort_pseudo } from "../models/QuickSort/QuickSortPseudo";
+import { useTranslation } from 'next-i18next'
 
 async function fetchQuickSort(arr: number[]) {
   const response = await fetch("http://localhost:3000/api/quickSort", {
@@ -14,6 +15,12 @@ async function fetchQuickSort(arr: number[]) {
 }
 
 const QuickSortVisualizer = () => {
+
+  const { t } = useTranslation(["QuickSortPage", "buttonsAndPlaceholders"]); // For translation
+  // State to hold the sorting states
+  const [InsertionSortStates, setInsertionSortStates] = useState<InsertionSortState[]>([]);
+  // State to control the current displayed state
+  const [currentStep, setCurrentStep] = useState(0);
 
   const [error, setError] = useState<string>('');
 
@@ -48,7 +55,7 @@ const QuickSortVisualizer = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Quick Sort Algorithm</h1>
+      <h1> {t("QuickSortPage:header")} </h1>
       <div className={styles.inputArea}>
         <form onSubmit={handleSubmit}>
           <input
@@ -95,14 +102,14 @@ const QuickSortVisualizer = () => {
           className={styles.sortButton}
           onClick={() => setCurrentStep(currentStep - 1)}
         >
-          Previous
+          {t("buttonsAndPlaceholders:previous")}
         </button>
         <button
           disabled={currentStep >= quickSortStates.length - 1}
           className={styles.sortButton}
           onClick={() => setCurrentStep(currentStep + 1)}
         >
-          Next
+          {t("buttonsAndPlaceholders:next")}
         </button>
       </div>
       <PseudoCode pseudo_code={quick_sort_pseudo} step={quickSortStates[currentStep]?.pseudoCode} />

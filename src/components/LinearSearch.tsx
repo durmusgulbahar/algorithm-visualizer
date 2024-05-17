@@ -2,11 +2,13 @@
 import styles from "@/src/styles/InsertionSort.module.css";
 import { useState } from "react";
 import { LinearSearchState } from "../models/linearSearch/LinearSearchState";
-
+import PseudoCode from "./PseudoCode";
+import { useTranslation } from "next-i18next";
 import { linear_pseudo } from "../models/linearSearch/LinearSearchPseudo";
 import { getLinearSearch } from "../services/getLinearSearch";
 import ExplainBox from "./ExplainBox";
 import RightSide from "./RightSide";
+
 async function fetchLinearSearch(arr: number[], key: number) {
   const data = await getLinearSearch(arr, key);
   const states = await data.json();
@@ -30,6 +32,8 @@ export default function LinearSearchVisualizer() {
       setError('Please enter a valid array of numbers separated by commas.');
     }
   };
+
+    const { t } = useTranslation(["LinearSearchPage", "buttonsAndPlaceholders"]); // For translation
   // State to hold the sorting states
   const [sortStates, setSortStates] = useState<LinearSearchState[]>([]);
   // State to control the current displayed state
@@ -96,7 +100,7 @@ export default function LinearSearchVisualizer() {
           justifyContent: "center",
         }}
       >
-        <h1>Linear Search</h1>
+        <h1> {t("LinearSearchPage:header")} </h1>
         <div className="inputArea">
           <form onSubmit={handleSubmit}>
             <input
@@ -117,7 +121,7 @@ export default function LinearSearchVisualizer() {
             value={key}
             onChange={handleInputChangeKey}
           />
-          <button onClick={getStates}>Submit</button>
+          <button onClick={getStates}>{t("buttonsAndPlaceholders:submit")}</button>
         </div>
 
         <div>
@@ -145,7 +149,7 @@ export default function LinearSearchVisualizer() {
               setCurrentStep(currentStep > 0 ? currentStep - 1 : 0)
             }
           >
-            Previous
+            {t("buttonsAndPlaceholders:previous")}
           </button>
           <button
             className={styles.sortButton}
@@ -157,7 +161,7 @@ export default function LinearSearchVisualizer() {
               )
             }
           >
-            Next
+            {t("buttonsAndPlaceholders:next")}
           </button>
           <br />
         </div>

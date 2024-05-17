@@ -4,6 +4,7 @@ import styles from "../styles/InsertionSort.module.css";
 import { insertion_sort_pseudo } from "../models/InsertionSort/InsertionSortPseudo";
 import { getInsertionSort } from "../services/getInsertionSort";
 import RightSide from "./RightSide";
+import { useTranslation } from "next-i18next";
 
 const InsertionSortVisualizer = () => {
 
@@ -30,6 +31,8 @@ async function fetchInsertionSortStates(arr: number[]) {
   return states.states;
 }
 
+const InsertionSortVisualizer = () => {
+  const { t } = useTranslation(["InsertionSortPage", "buttonsAndPlaceholders"]); // For translation
   // State to hold the sorting states
   const [InsertionSortStates, setInsertionSortStates] = useState<
     InsertionSortState[]
@@ -60,7 +63,7 @@ async function fetchInsertionSortStates(arr: number[]) {
 
   return (
     <div className={styles.container}>
-      <h1>Insertion Sort Algorithm</h1>
+      <h1>{t("InsertionSortPage:header")}</h1>
       <div className="inputArea">
         <form onSubmit={handleSubmit}>
           <input
@@ -99,7 +102,6 @@ async function fetchInsertionSortStates(arr: number[]) {
           )
         )}
       </div>
-
       <div className={styles.barContainer}>
         {InsertionSortStates[currentStep]?.currentListState.map(
           (value, index) => (
@@ -128,7 +130,7 @@ async function fetchInsertionSortStates(arr: number[]) {
           className={styles.sortButton}
           onClick={() => setCurrentStep(currentStep > 0 ? currentStep - 1 : 0)}
         >
-          Previous
+          {t("buttonsAndPlaceholders:previous")}
         </button>
         <button
           className={styles.sortButton}
@@ -140,7 +142,7 @@ async function fetchInsertionSortStates(arr: number[]) {
             )
           }
         >
-          Next
+          {t("buttonsAndPlaceholders:next")}
         </button>
         <p>{InsertionSortStates[currentStep]?.msg}</p>
       </div>

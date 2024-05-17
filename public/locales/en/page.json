@@ -1,0 +1,10 @@
+{
+    "title": "Algorithm Visualizer",
+    "searchingAlgortihms": "Searching Algorithms",
+    "sortingAlgorithms": "Sorting Algorithms",
+    "linearSearch": "Linear Search",
+    "insertionSort": "Insertion Sort",
+    "bubbleSort": "Bubble Sort",
+    "quickSort": "Quick Sort",
+    "footer": "Akdeniz University, Computer Engineering - 2024"
+}

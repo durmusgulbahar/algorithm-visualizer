@@ -2,6 +2,7 @@ import React from "react";
 import ExplainBox from "./ExplainBox";
 import PseudoCodeComponent from "./PseudoCode";
 import { PseudoCode } from "../models/PseudoCode";
+
 export default function RightSide({
   step,
   pseudo_code,
@@ -13,6 +14,7 @@ export default function RightSide({
   complexity: string;
   text: string;
 }) {
+
   return (
     <div
       style={{
@@ -23,21 +25,21 @@ export default function RightSide({
         position: "absolute",
         zIndex: 1,
         top: "10%",
-        right: "10px",  
+        right: "10px",
         border: "1px solid white",
         width: "20%",
       }}
     >
-      <ExplainBox text={text}/>
+      <ExplainBox text={text} />
       <p style={{ fontWeight: "bold" }}>
         TIME COMPLEXITY: <span style={{ fontWeight: "normal" }}>{complexity}</span>
         <a target="_blank" style={
-            {
-                color: "white",
-                fontWeight: "normal",
-                fontSize: "13px",
-                display: "block",
-            }
+          {
+            color: "white",
+            fontWeight: "normal",
+            fontSize: "13px",
+            display: "block",
+          }
         } href="https://www.geeksforgeeks.org/time-complexity-and-space-complexity/">What is time complexity?</a>
       </p>
       <p style={{ fontWeight: "bold" }}>PSEUDO CODE:</p>

@@ -2,11 +2,8 @@
 
 import Link from "next/link";
 import styles from "@/src/styles/home.module.css";
-import { useTranslation } from "next-i18next";
-import LanguageSwitcher from "../components/LanguageSwitcher";
 
 export default function Home() {
-  const { t } = useTranslation("page");
 
   return (
     <div
@@ -25,7 +22,7 @@ export default function Home() {
         }}
       >
         <header>
-          <h1>{t('searchingAlgorithm')}</h1>
+          <h1>Searching Algorithms</h1>
         </header>
         <div className={styles.container}>
           <div className={styles.animationDisplay}>
@@ -33,7 +30,7 @@ export default function Home() {
               href="/LinearSearchPage"
               style={{ textDecoration: "none", color: "white" }}
             >
-              {t('linearSearch')}
+              Linear Search
             </Link>
           </div>
         </div>
@@ -44,7 +41,7 @@ export default function Home() {
         }}
       >
         <header>
-          <h1>{t('sortingAlgorithms')}</h1>
+          <h1>Sorting Algorithms</h1>
         </header>
         <div className={styles.container}>
           <div className={styles.animationDisplay}>
@@ -52,7 +49,7 @@ export default function Home() {
               href="/insertionSortPage"
               style={{ textDecoration: "none", color: "white" }}
             >
-              {t('insertionSort')}
+              Insertion Sort
             </Link>
           </div>
           <div className={styles.animationDisplay}>
@@ -60,7 +57,7 @@ export default function Home() {
               href="/QuickSortPage"
               style={{ textDecoration: "none", color: "white" }}
             >
-              {t('quickSort')}
+              Quick Sort
             </Link>
           </div>
           <div className={styles.animationDisplay}>
@@ -68,13 +65,10 @@ export default function Home() {
               href="/LinearSearchPage"
               style={{ textDecoration: "none", color: "white" }}
             >
-              {t('linearSearch')}
+              Linear Search
             </Link>
           </div>
         </div>
-      </div>
-      <div>
-        <LanguageSwitcher />
       </div>
     </div>
   );

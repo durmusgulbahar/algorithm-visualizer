@@ -1,26 +1,26 @@
 'use client';
 
-import type { Metadata } from "next";
 import "./global.css";
-
 import Footer from "@/src/components/Footer";
 import Link from "next/link";
-
-import { useTranslation } from "next-i18next";
-
-
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { t } = useTranslation("page");
-
 
   return (
-    <html lang="en">
+    <html lang='en'>
       <body>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "10px",
+          }}
+        >
+        </div>
         <Link href={"/"}>
           <h1
             style={{
@@ -35,10 +35,9 @@ export default function RootLayout({
               border: "1px solid white",
             }}
           >
-            {t("title")}
+            Algorithm Visualizer
           </h1>
         </Link>
-
         {children}
         <Footer />
       </body>

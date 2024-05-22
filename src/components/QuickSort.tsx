@@ -3,7 +3,6 @@ import { QuickSortState } from "@/src/models/QuickSort/QuickSortState";
 import styles from "../styles/QuickSort.module.css";
 import PseudoCode from "./PseudoCode";
 import { quick_sort_pseudo } from "../models/QuickSort/QuickSortPseudo";
-import { useTranslation } from 'next-i18next'
 
 async function fetchQuickSort(arr: number[]) {
   const response = await fetch("http://localhost:3000/api/quickSort", {
@@ -15,10 +14,8 @@ async function fetchQuickSort(arr: number[]) {
 }
 
 const QuickSortVisualizer = () => {
-
-  const { t } = useTranslation(["QuickSortPage", "buttonsAndPlaceholders"]); // For translation
   // State to hold the sorting states
-  const [InsertionSortStates, setInsertionSortStates] = useState<InsertionSortState[]>([]);
+  const [InsertionSortStates, setInsertionSortStates] = useState<QuickSortState[]>([]);
   // State to control the current displayed state
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -40,7 +37,6 @@ const QuickSortVisualizer = () => {
   };
 
   const [quickSortStates, setQuickSortStates] = useState<QuickSortState[]>([]);
-  const [currentStep, setCurrentStep] = useState(0);
   const [inputArr, setInputArr] = useState("");
 
   async function getStates() {
@@ -55,7 +51,7 @@ const QuickSortVisualizer = () => {
 
   return (
     <div className={styles.container}>
-      <h1> {t("QuickSortPage:header")} </h1>
+      <h1>Quick Sort</h1>
       <div className={styles.inputArea}>
         <form onSubmit={handleSubmit}>
           <input
@@ -70,7 +66,6 @@ const QuickSortVisualizer = () => {
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <button type="submit" onClick={getStates}>Submit</button>
         </form>
-        <button onClick={getStates}>Submit</button>
       </div>
       <div className={styles.barContainer}>
         {quickSortStates[currentStep]?.currentListState.map((value, index) => {
@@ -84,7 +79,6 @@ const QuickSortVisualizer = () => {
           } else if (quickSortStates[currentStep].status === "compare") {
             barStyle = `${styles.bar} ${styles.compare}`;
           }
-
           return (
             <div
               className={barStyle}
@@ -102,14 +96,14 @@ const QuickSortVisualizer = () => {
           className={styles.sortButton}
           onClick={() => setCurrentStep(currentStep - 1)}
         >
-          {t("buttonsAndPlaceholders:previous")}
+          Previous
         </button>
         <button
           disabled={currentStep >= quickSortStates.length - 1}
           className={styles.sortButton}
           onClick={() => setCurrentStep(currentStep + 1)}
         >
-          {t("buttonsAndPlaceholders:next")}
+          Next
         </button>
       </div>
       <PseudoCode pseudo_code={quick_sort_pseudo} step={quickSortStates[currentStep]?.pseudoCode} />

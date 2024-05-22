@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styles from '@/src/styles/footer.module.css'; // Import the CSS module
+import styles from '@/src/styles/footer.module.css';
 import logo from "@/public/logo-single.png"
 import Image from 'next/image';
 
@@ -15,7 +15,7 @@ const Footer = () => {
           alt="Akdeniz Üniversitesi Logo"
           className={styles.footerImage}
         />
-        <p className={styles.footerText}>cart curt</p>
+        <p className={styles.footerText}>Akdeniz University, Computer Engineering - 2024</p>
       </div>
     </footer>
   );

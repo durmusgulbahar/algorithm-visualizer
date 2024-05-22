@@ -4,26 +4,6 @@ import styles from "../styles/InsertionSort.module.css";
 import { insertion_sort_pseudo } from "../models/InsertionSort/InsertionSortPseudo";
 import { getInsertionSort } from "../services/getInsertionSort";
 import RightSide from "./RightSide";
-import { useTranslation } from "next-i18next";
-
-const InsertionSortVisualizer = () => {
-
-const [error, setError] = useState<string>('');
-
-const validateInput = (value: string): boolean => {
-  const pattern = /^(\d+(,\d+)*)?$/;
-  return pattern.test(value);
-};
-
-const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  if (validateInput(inputArr)) {
-    setError('');
-    await getStates(); // Call getStates if input is valid
-  } else {
-    setError('Please enter a valid array of numbers separated by commas.');
-  }
-};
 
 async function fetchInsertionSortStates(arr: number[]) {
   const data = await getInsertionSort(arr);
@@ -32,7 +12,24 @@ async function fetchInsertionSortStates(arr: number[]) {
 }
 
 const InsertionSortVisualizer = () => {
-  const { t } = useTranslation(["InsertionSortPage", "buttonsAndPlaceholders"]); // For translation
+
+  const [error, setError] = useState<string>('');
+
+  const validateInput = (value: string): boolean => {
+    const pattern = /^(\d+(,\d+)*)?$/;
+    return pattern.test(value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (validateInput(inputArr)) {
+      setError('');
+      await getStates(); // Call getStates if input is valid
+    } else {
+      setError('Please enter a valid array of numbers separated by commas.');
+    }
+  };
+
   // State to hold the sorting states
   const [InsertionSortStates, setInsertionSortStates] = useState<
     InsertionSortState[]
@@ -63,7 +60,7 @@ const InsertionSortVisualizer = () => {
 
   return (
     <div className={styles.container}>
-      <h1>{t("InsertionSortPage:header")}</h1>
+      <h1>Insertion Sort</h1>
       <div className="inputArea">
         <form onSubmit={handleSubmit}>
           <input
@@ -130,7 +127,7 @@ const InsertionSortVisualizer = () => {
           className={styles.sortButton}
           onClick={() => setCurrentStep(currentStep > 0 ? currentStep - 1 : 0)}
         >
-          {t("buttonsAndPlaceholders:previous")}
+          Previous
         </button>
         <button
           className={styles.sortButton}
@@ -142,7 +139,7 @@ const InsertionSortVisualizer = () => {
             )
           }
         >
-          {t("buttonsAndPlaceholders:next")}
+          Next
         </button>
         <p>{InsertionSortStates[currentStep]?.msg}</p>
       </div>

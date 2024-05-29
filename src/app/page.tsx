@@ -33,7 +33,16 @@ export default function Home() {
               Linear Search
             </Link>
           </div>
+          <div className={styles.animationDisplay}>
+            <Link
+              href="/BinarySearchPage"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              Binary Search
+            </Link>
+          </div>
         </div>
+        
       </div>
       <div
         style={{

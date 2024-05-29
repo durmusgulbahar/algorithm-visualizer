@@ -4,6 +4,7 @@ import styles from "../styles/InsertionSort.module.css";
 import { insertion_sort_pseudo } from "../models/InsertionSort/InsertionSortPseudo";
 import { getInsertionSort } from "../services/getInsertionSort";
 import RightSide from "./RightSide";
+
 async function fetchInsertionSortStates(arr: number[]) {
   const data = await getInsertionSort(arr);
   const states = await data.json();
@@ -11,6 +12,24 @@ async function fetchInsertionSortStates(arr: number[]) {
 }
 
 const InsertionSortVisualizer = () => {
+
+  const [error, setError] = useState<string>('');
+
+  const validateInput = (value: string): boolean => {
+    const pattern = /^(\d+(,\d+)*)?$/;
+    return pattern.test(value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (validateInput(inputArr)) {
+      setError('');
+      await getStates(); // Call getStates if input is valid
+    } else {
+      setError('Please enter a valid array of numbers separated by commas.');
+    }
+  };
+
   // State to hold the sorting states
   const [InsertionSortStates, setInsertionSortStates] = useState<
     InsertionSortState[]
@@ -41,26 +60,31 @@ const InsertionSortVisualizer = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Insertion Sort Algorithm</h1>
+      <h1>Insertion Sort</h1>
       <div className="inputArea">
-        <input
-          type="text"
-          placeholder="Enter input..."
-          value={inputArr}
-          onChange={handleInputChange}
-        />
-        <button onClick={getStates}>Submit</button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            id="numberArray"
+            placeholder="Enter input..."
+            value={inputArr}
+            onChange={handleInputChange}
+            pattern="^(\d+(,\d+)*)?$"
+            required
+          />
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <button type="submit" onClick={getStates}>Submit</button>
+        </form>
       </div>
       <div className={styles.barContainer}>
         {InsertionSortStates[currentStep]?.currentListState.map(
           (value, index) => (
             <div
-              className={`${styles.bar} ${
-                InsertionSortStates[currentStep].isPlacedCorrectLocation &&
+              className={`${styles.bar} ${InsertionSortStates[currentStep].isPlacedCorrectLocation &&
                 index === InsertionSortStates[currentStep].currentIndex
-                  ? styles.correctLocation
-                  : ""
-              }`}
+                ? styles.correctLocation
+                : ""
+                }`}
               key={index}
               style={{
                 height: `${(value + 15) * 1.5}px`,
@@ -75,17 +99,15 @@ const InsertionSortVisualizer = () => {
           )
         )}
       </div>
-      
       <div className={styles.barContainer}>
         {InsertionSortStates[currentStep]?.currentListState.map(
           (value, index) => (
             <div
-              className={`${styles.bar} ${
-                InsertionSortStates[currentStep].isPlacedCorrectLocation &&
+              className={`${styles.bar} ${InsertionSortStates[currentStep].isPlacedCorrectLocation &&
                 index === InsertionSortStates[currentStep].currentIndex
-                  ? styles.correctLocation
-                  : ""
-              }`}
+                ? styles.correctLocation
+                : ""
+                }`}
               key={index}
               style={{
                 height: `${(value + 15) * 1.5}px`,

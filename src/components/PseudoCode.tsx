@@ -11,10 +11,8 @@ export default function PseudoCodeComponent({
   return (
     <div
       style={{
-       
       }}
     >
-      
       <div>
         {Object.keys(pseudo_code.pseudo_code).map((key) => {
           return step === parseInt(key) ? (

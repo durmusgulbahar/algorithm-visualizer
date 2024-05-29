@@ -1,7 +1,10 @@
+'use client';
+
 import Link from "next/link";
 import styles from "@/src/styles/home.module.css";
 
 export default function Home() {
+
   return (
     <div
       style={{
@@ -66,10 +69,17 @@ export default function Home() {
               Quick Sort
             </Link>
           </div>
-          
-          
+          <div className={styles.animationDisplay}>
+            <Link
+              href="/LinearSearchPage"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              Linear Search
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
 }
+

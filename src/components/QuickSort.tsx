@@ -14,8 +14,29 @@ async function fetchQuickSort(arr: number[]) {
 }
 
 const QuickSortVisualizer = () => {
-  const [quickSortStates, setQuickSortStates] = useState<QuickSortState[]>([]);
+  // State to hold the sorting states
+  const [InsertionSortStates, setInsertionSortStates] = useState<QuickSortState[]>([]);
+  // State to control the current displayed state
   const [currentStep, setCurrentStep] = useState(0);
+
+  const [error, setError] = useState<string>('');
+
+  const validateInput = (value: string): boolean => {
+    const pattern = /^(\d+(,\d+)*)?$/;
+    return pattern.test(value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (validateInput(inputArr)) {
+      setError('');
+      await getStates(); // Call getStates if input is valid
+    } else {
+      setError('Please enter a valid array of numbers separated by commas.');
+    }
+  };
+
+  const [quickSortStates, setQuickSortStates] = useState<QuickSortState[]>([]);
   const [inputArr, setInputArr] = useState("");
 
   async function getStates() {
@@ -30,15 +51,21 @@ const QuickSortVisualizer = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Quick Sort Algorithm</h1>
+      <h1>Quick Sort</h1>
       <div className={styles.inputArea}>
-        <input
-          type="text"
-          placeholder="Enter numbers separated by commas..."
-          value={inputArr}
-          onChange={handleInputChange}
-        />
-        <button onClick={getStates}>Submit</button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            id="numberArray"
+            placeholder="Enter input..."
+            value={inputArr}
+            onChange={handleInputChange}
+            pattern="^(\d+(,\d+)*)?$"
+            required
+          />
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <button type="submit" onClick={getStates}>Submit</button>
+        </form>
       </div>
       <div className={styles.barContainer}>
         {quickSortStates[currentStep]?.currentListState.map((value, index) => {
@@ -52,7 +79,6 @@ const QuickSortVisualizer = () => {
           } else if (quickSortStates[currentStep].status === "compare") {
             barStyle = `${styles.bar} ${styles.compare}`;
           }
-
           return (
             <div
               className={barStyle}

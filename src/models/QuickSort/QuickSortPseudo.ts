@@ -1,7 +1,6 @@
 import { PseudoCode } from "../PseudoCode";
 
 export const quick_sort_pseudo: PseudoCode = {
-
     pseudo_code: [
         "for each (unsorted) partition",
         "set first element as pivot",

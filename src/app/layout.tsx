@@ -1,26 +1,26 @@
-import type { Metadata } from "next";
-import "./global.css";
+'use client';
 
+import "./global.css";
 import Footer from "@/src/components/Footer";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Algorithm Visualizer",
-  description:
-    "Algorithm Visualizer is a web application that visualizes algorithms. Provided by Akdeniz University",
-  icons: {
-    icon: "/icon.ico",
-  },
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
-    <html lang="en">
+    <html lang='en'>
       <body>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "10px",
+          }}
+        >
+        </div>
         <Link href={"/"}>
           <h1
             style={{
@@ -38,7 +38,6 @@ export default function RootLayout({
             Algorithm Visualizer
           </h1>
         </Link>
-
         {children}
         <Footer />
       </body>

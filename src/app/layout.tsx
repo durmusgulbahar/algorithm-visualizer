@@ -21,23 +21,32 @@ export default function RootLayout({
           }}
         >
         </div>
-        <Link href={"/"}>
-          <h1
-            style={{
-              textAlign: "center",
-              padding: "20px",
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "5%",
+            position: "fixed",
+            top: "0",
+            left: "0",
+            right: "0",
+            zIndex: 1,
+            border: "1px solid white",
+            textAlign: "center",
+            padding: "20px",
+          }}
+        >
+          <Link href={"/"}>
+            <h1 style={{
               fontSize: "1.5rem",
               color: "white",
-              top: "0",
-              left: "1%",
-              position: "fixed",
-              textDecoration: "none",
-              border: "1px solid white",
-            }}
-          >
-            Algorithm Visualizer
-          </h1>
-        </Link>
+            textDecoration: "none",
+            }}>
+              Algorithm Visualizer
+            </h1>
+          </Link>
+        </div>
         {children}
         <Footer />
       </body>

@@ -1,6 +1,6 @@
 # Contributing to Algorithm Visualizer
 
-Thank you for your interest in contributing to Algorithm Visualizer! We welcome contributions from the community to help make this project even better.
+Thank you for your interest in contributing to Algorithm Visualizer! We welcome contributions from the community to make this project even better.
 
 ## Getting Started
 
@@ -12,13 +12,6 @@ To get started with contributing, please follow these steps:
 4. Make your changes and ensure that the code works.
 5. Commit your changes and push them to your forked repository.
 6. Submit a pull request to the main repository.
-
-## Code Style
-
-We follow a specific code style in this project to maintain consistency. Please make sure to adhere to the following guidelines:
-
-- Write clear and concise comments to explain your code.
-- Follow the naming conventions used in the project.
 
 ## Reporting Issues
 

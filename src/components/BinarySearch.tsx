@@ -3,19 +3,19 @@ import { useState } from "react";
 import { BinarySearchState } from "../models/binarySearch/BinarySearchState";
 import { binary_search_pseudo } from "../models/binarySearch/BinarySearchPseudo";
 import { getBinarySearch } from "../services/getBinarySearch";
-import ExplainBox from "./ExplainBox";
 import RightSide from "./RightSide";
+
 export type BinarySearchStatex = {
-    currentListState: number[];
-    high: number;
-    low: number;
-    middle: number;
-    found: boolean;
-    msg: string
-    pseudocode: number;
-  };
-  
-  
+  currentListState: number[];
+  high: number;
+  low: number;
+  middle: number;
+  found: boolean;
+  msg: string
+  pseudocode: number;
+};
+
+
 async function fetchBinarySearch(arr: number[], key: number) {
   const data = await getBinarySearch(arr, key);
   const states = await data.json();
@@ -69,101 +69,87 @@ export default function BinarySearchVisualizer() {
     <div
       style={{
         display: "flex",
-        flexDirection: "row",
-        width: "100%",
-        height: "100%",
+        flexDirection: "column",
+        alignItems: "center",
         padding: "20px",
-
-        justifyContent: "center",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "30px",
-          justifyContent: "center",
-        }}
-      >
-        <h1>Binary Search</h1>
-        <div className="inputArea">
-          <input
-            type="text"
-            placeholder="Enter the sorted array..."
-            value={inputArr}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            placeholder="Enter the key..."
-            value={key}
-            onChange={handleInputChangeKey}
-          />
-          <button onClick={getStates}>Submit</button>
-        </div>
+      <h1>Binary Search</h1>
+      <div className="inputArea">
+        <input
+          type="text"
+          placeholder="Enter the sorted array..."
+          value={inputArr}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          placeholder="Enter the key..."
+          value={key}
+          onChange={handleInputChangeKey}
+        />
+        <button onClick={getStates}>Submit</button>
+      </div>
 
-        <div>
-          <div className={styles.barContainer}>
-            {searchStates[currentStep]?.currentListState.map((value, index) => (
-              <div
-                key={index}
-                className={styles.bar}
-                style={{
-                  backgroundColor: determineColor(
-                    index,
-                    searchStates[currentStep]
-                  ), // Color of the bar
-                }}
-              >
-                {value}
-              </div>
-            ))}
-          </div>
+      <div>
+        <div className={styles.barContainer}>
+          {searchStates[currentStep]?.currentListState.map((value, index) => (
+            <div
+              key={index}
+              className={styles.bar}
+              style={{
+                backgroundColor: determineColor(
+                  index,
+                  searchStates[currentStep]
+                ), // Color of the bar
+              }}
+            >
+              {value}
+            </div>
+          ))}
         </div>
-        <div className={styles.buttonContainer}>
-          <button
-            className={styles.sortButton}
-            onClick={() =>
-              setCurrentStep(currentStep > 0 ? currentStep - 1 : 0)
-            }
-          >
-            Previous
-          </button>
-          <button
-            className={styles.sortButton}
-            onClick={() =>
-              setCurrentStep(
-                currentStep < searchStates.length - 1
-                  ? currentStep + 1
-                  : currentStep
-              )
-            }
-          >
-            Next
-          </button>
-          <br />
-        </div>
-        <p
-          style={{
-            color:
-              currentStep === 0
-                ? "white"
-                : searchStates[currentStep]?.found
+      </div>
+      <div className={styles.buttonContainer}>
+        <button
+          className={styles.sortButton}
+          onClick={() =>
+            setCurrentStep(currentStep > 0 ? currentStep - 1 : 0)
+          }
+        >
+          Previous
+        </button>
+        <button
+          className={styles.sortButton}
+          onClick={() =>
+            setCurrentStep(
+              currentStep < searchStates.length - 1
+                ? currentStep + 1
+                : currentStep
+            )
+          }
+        >
+          Next
+        </button>
+        <br />
+      </div>
+      <p
+        style={{
+          color:
+            currentStep === 0
+              ? "white"
+              : searchStates[currentStep]?.found
                 ? "green"
                 : "red",
-            fontSize: "20px",
-
-            width: "60%",
-            textAlign: "center",
-          }}
-        >
-          {!searchStates[currentStep]?.found &&
+          fontSize: "20px",
+          width: "60%",
+          textAlign: "center",
+        }}
+      >
+        {!searchStates[currentStep]?.found &&
           currentStep === searchStates.length - 1
-            ? `Key not found in the array`
-            : searchStates[currentStep]?.msg}
-        </p>
-      </div>
+          ? `Key not found in the array`
+          : searchStates[currentStep]?.msg}
+      </p>
 
       <RightSide
         text="Binary search is an efficient algorithm for finding an element's position in a sorted array. It works by repeatedly dividing the search interval in half until the key is found or the interval becomes empty."

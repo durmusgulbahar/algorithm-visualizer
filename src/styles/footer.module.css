@@ -1,3 +1,4 @@
+/* footer.module.css */
 .footer {
     background-color: #121212;
     display: flex;
@@ -6,23 +7,43 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-}
-
-.footerContainer {
+  }
+  
+  .footerContainer {
     align-items: center;
     display: flex;
     flex-direction: row;
     margin: auto;
     padding-right: 230px;
-}
-
-.footerImage {
+  }
+  
+  .footerImage {
     margin-right: 20px;
     max-width: 50px;
     height: 50px;
-}
-
-.footerText {
+  }
+  
+  .footerText {
     font-size: 14px;
     text-align: center;
-}
+  }
+  
+  @media (max-width: 768px) {
+    .footer {
+      position: static;
+      flex-direction: column;
+      padding: 10px;
+    }
+  
+    .footerContainer {
+      flex-direction: column;
+      padding-right: 0;
+      text-align: center;
+    }
+  
+    .footerText {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  

@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import styles from '@/src/styles/footer.module.css';
 import logo from "@/public/logo-single.png"

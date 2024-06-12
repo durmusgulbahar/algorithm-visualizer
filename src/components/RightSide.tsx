@@ -12,9 +12,10 @@ const RightSideContainer = styled.div`
   position: absolute;
   z-index: 1;
   top: 10%;
-  right: 10px;
+  right: 0px;
   border: 1px solid white;
   width: 20%;
+  margin-top: 4px;
 
   @media (max-width: 768px) {
     position: static;

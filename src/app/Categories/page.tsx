@@ -1,13 +1,10 @@
-'use client';
+import React from 'react'
+import Link from 'next/link'
+import styles from '@/src/styles/home.module.css'
 
-import Link from "next/link";
-import styles from "@/src/styles/home.module.css";
-
-export default function Home() {
-
-  return (
-
-    <div
+export default function Categories() {
+    return(
+      <div
       style={{
         display: "flex",
         flexDirection: "row",
@@ -63,7 +60,7 @@ export default function Home() {
             </Link>
           </div>
           <div className={styles.animationDisplay}>
-             <Link
+            <Link
               href="/QuickSortPage"
               style={{ textDecoration: "none", color: "white" }}
             >
@@ -72,11 +69,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
     </div>
-  );
-}
-
-
-
-
+    )
+  }

@@ -39,13 +39,13 @@ export default function Home() {
       >
         <div style={{ display: "flex", flexDirection: "column", width: "45%" }}>
           <p>
-            This websites purpose is to make you understand algorithms better by
-            visualizing them.
+          Algorithm Visualizer is a tool for understanding algorithms better by visualizing them.
+
           </p>
-          <p>This project supported by TÜBİTAK 2209-A</p>
+          <p>This project was supported by TÜBİTAK 2209-A
+          </p>
           <p>
-            This project is developed by students of Akdeniz University CSE
-            Department.
+          Developed by students of Akdeniz University CSE Department.
           </p>
           <div style={{ width: "50px" }}>
             <Link

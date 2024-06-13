@@ -63,7 +63,7 @@ export default function RootLayout({
               color: "white",
               textDecoration:"none",
               textAlign: "center",
-              marginRight:"50px"
+              
             }}>
               Algorithm Visualizer
             </h1>

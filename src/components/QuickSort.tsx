@@ -53,7 +53,7 @@ const QuickSortVisualizer = () => {
   return (
     <div className={styles.container}>
       <h1>Quick Sort</h1>
-      <div className={styles.inputArea}>
+      <div className="inputArea">
         <form onSubmit={handleSubmit}>
           <input
             type="text"

@@ -4,7 +4,6 @@ import "./global.css";
 import Footer from "@/src/components/Footer";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -54,15 +53,22 @@ export default function RootLayout({
         >
         </div>
         <div style={headerStyle}>
-          <Link href={"/"}>
+          <Link href={"/"} style={{
+              fontSize: "1.5rem",
+              color: "white",
+              textDecoration:"none"
+            }} >
             <h1 style={{
               fontSize: "1.5rem",
               color: "white",
-              textDecoration: "none",
+              textDecoration:"none",
+              textAlign: "center",
+              marginRight:"50px"
             }}>
               Algorithm Visualizer
             </h1>
           </Link>
+          
         </div>
         {children}
         <Footer />

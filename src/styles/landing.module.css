@@ -1,0 +1,145 @@
+.planeContainer {
+    width: 200px;
+    height: 200px;
+    position: fixed !important;
+
+    transition: transform 0.3s ease;
+}
+
+.planeContainer:hover {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+  }
+
+.plane {
+    width: 180px;
+    height: 180px;
+    transform-style: preserve-3d;
+    margin-top: 80px;
+}
+
+
+.plane.main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    transform: rotateX(60deg) rotateZ(-30deg);
+    -webkit-animation: rotate 20s infinite linear;
+    animation: rotate 20s infinite linear;
+}
+
+.plane.main .circle {
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    transform-style: preserve-3d;
+    border-radius: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 90px #ffffff, inset 0 0 90px #ffffff;
+}
+
+.plane.main .circle::before,
+.plane.main .circle::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 10%;
+    height: 10%;
+    border-radius: 100%;
+    background: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0 0 90px 2px #ffffff;
+}
+
+.plane.main .circle::before {
+    transform: translateZ(-120px);
+}
+
+.plane.main .circle::after {
+    transform: translateZ(120px);
+}
+
+.plane.main .circle:nth-child(1) {
+    transform: rotateZ(72deg) rotateX(63.435deg);
+}
+
+.plane.main .circle:nth-child(2) {
+    transform: rotateZ(144deg) rotateX(63.435deg);
+}
+
+.plane.main .circle:nth-child(3) {
+    transform: rotateZ(216deg) rotateX(63.435deg);
+}
+
+.plane.main .circle:nth-child(4) {
+    transform: rotateZ(288deg) rotateX(63.435deg);
+}
+
+.plane.main .circle:nth-child(5) {
+    transform: rotateZ(360deg) rotateX(63.435deg);
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+.plane.main .circle {
+    box-shadow: 0 0 90px var(--primary), inset 0 0 90px var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.plane.main .circle::before,
+.plane.main .circle::after {
+    background: var(--primary);
+    box-shadow: 0 0 15px 2px var(--primary);
+}
+
+.plane-botavatar.main .circle {
+    box-shadow: 0 0 20px #ed143db5, inset 0 0 90px #ed143d21;
+    border: 1px solid var(--primary);
+}
+
+.plane-botavatar.main .circle::before,
+.plane-botavatar.main .circle::after {
+    background: var(--primary);
+    box-shadow: 0 0 15px 2px #e2e3e9;
+}
+
+.linkAnimation {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    border: 1px solid white;
+    font-size: 25px;
+    transition: transform 0.3s ease;
+    padding:15px;
+    width: 300px;
+  }
+  
+  .linkAnimation:hover {
+    transform: scale(1.1);
+  }

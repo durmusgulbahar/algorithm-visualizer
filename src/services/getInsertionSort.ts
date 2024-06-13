@@ -1,5 +1,5 @@
 export async function getInsertionSort(arr: number[]) {
-    const res = await fetch("https://senior-pmtxlxkx6a-uc.a.run.app/insertion", {
+    const res = await fetch("https://api.akdualgoritma.com/insertion", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

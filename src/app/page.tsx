@@ -62,7 +62,7 @@ export default function Home() {
             </Link>
           </div>
           <div className={styles.animationDisplay}>
-            <Link
+             <Link
               href="/QuickSortPage"
               style={{ textDecoration: "none", color: "white" }}
             >

@@ -3,6 +3,7 @@ import { QuickSortState } from "@/src/models/QuickSort/QuickSortState";
 import styles from "../styles/QuickSort.module.css";
 import PseudoCode from "./PseudoCode";
 import { quick_sort_pseudo } from "../models/QuickSort/QuickSortPseudo";
+import RightSide from "./RightSide";
 
 async function fetchQuickSort(arr: number[]) {
   const response = await fetch("http://localhost:3000/api/quickSort", {
@@ -106,7 +107,11 @@ const QuickSortVisualizer = () => {
           Next
         </button>
       </div>
-      <PseudoCode pseudo_code={quick_sort_pseudo} step={quickSortStates[currentStep]?.pseudoCode} />
+      <RightSide
+text="Quicksort has a space complexity of O(log(n)) in the average case. This arises from the recursive function calls and the partitioning process. It can be O(n) due to an unbalanced partitioning leading to a deep recursion stack in the worst case."        complexity="O(logn)"
+        step={quickSortStates[currentStep]?.pseudoCode}
+        pseudo_code={quick_sort_pseudo}
+      />
     </div>
   );
 };

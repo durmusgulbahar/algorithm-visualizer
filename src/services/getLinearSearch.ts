@@ -1,7 +1,6 @@
-const url = "http://localhost:8000/linearSearch"
 
 export async function getLinearSearch(arr: number[], key: number) {
-    const res = await fetch("https://senior-pmtxlxkx6a-uc.a.run.app/linear", {
+    const res = await fetch("https://api.akdualgoritma.com/linear", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -9,5 +8,6 @@ export async function getLinearSearch(arr: number[], key: number) {
         cache: "no-cache",
         body: JSON.stringify({ arr, key }),
     });
+    console.log(res)
     return res
 }

@@ -7,14 +7,14 @@ import styles from "@/src/styles/landing.module.css";
 
 export default function Home() {
   return (
-
-    <div>
+    <div style={{}}>
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "end",
           marginTop: "10%",
+          marginRight: "250px",
         }}
       >
         <div className={styles.planeContainer}>
@@ -32,11 +32,12 @@ export default function Home() {
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
+          marginLeft: "200px",
+          justifyContent: "start",
+        
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", width: "40%" }}>
+        <div style={{ display: "flex", flexDirection: "column", width: "45%" }}>
           <p>
             This websites purpose is to make you understand algorithms better by
             visualizing them.
@@ -63,17 +64,19 @@ export default function Home() {
                   marginBottom: "20px",
                 }}
               />
-
             </Link>
+            <div className={styles.linkAnimation}>
+              {" "}
+              <Link
+                href={"/Categories"}
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Go to algorithms {">>"}
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-
-      <div className={styles.linkAnimation}>
-        {" "}
-        <Link href={"/Categories"} style={{textDecoration:"none", color:"white"}}>Go to algorithms {">>"}</Link>
-      </div>
-
     </div>
   );
 }

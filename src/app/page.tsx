@@ -7,6 +7,7 @@ import styles from "@/src/styles/landing.module.css";
 
 export default function Home() {
   return (
+
     <div>
       <div
         style={{
@@ -62,14 +63,17 @@ export default function Home() {
                   marginBottom: "20px",
                 }}
               />
+
             </Link>
           </div>
         </div>
       </div>
+
       <div className={styles.linkAnimation}>
         {" "}
         <Link href={"/Categories"} style={{textDecoration:"none", color:"white"}}>Go to algorithms {">>"}</Link>
       </div>
+
     </div>
   );
 }

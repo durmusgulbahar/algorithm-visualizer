@@ -117,7 +117,7 @@ export default function LinearSearchVisualizer() {
             value={key}
             onChange={handleInputChangeKey}
           />
-          <button onClick={getStates}>Submit</button>
+          
         </div>
 
         <div>

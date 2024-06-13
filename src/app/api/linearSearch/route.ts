@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
  * Get req from client, execute linear search and send res states.
  * @params array and key
  */
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   const { arr, key } = await req.json();
 
   let states: LinearSearchState[] = [];
@@ -39,7 +39,8 @@ export async function POST(req: Request) {
   }
   console.log("STATES", states);
   try {
-    return NextResponse.json({ states: states });
+   return NextResponse.json({ states: states });
+   NextResponse.json({msg:"HELLOOO"});
   } catch (error) {
     console.log(error);
     return NextResponse.json({ message: "error", data: error });

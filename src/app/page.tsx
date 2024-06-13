@@ -1,82 +1,79 @@
-'use client';
+"use client";
 
 import Link from "next/link";
-import styles from "@/src/styles/home.module.css";
+import git from "@/public/social-media.png";
+import Image from "next/image";
+import styles from "@/src/styles/landing.module.css";
 
 export default function Home() {
-
   return (
 
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        width: "100%",
-        height: "100%",
-        padding: "20px",
-        justifyContent: "space-around",
-      }}
-    >
+    <div>
       <div
         style={{
-          width: "30%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: "10%",
         }}
       >
-        <header>
-          <h1 style={{ whiteSpace: "nowrap" }}>Searching Algorithms</h1>
-        </header>
-        <div className={styles.container}>
-          <div className={styles.animationDisplay}>
-            <Link
-              href="/LinearSearchPage"
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              Linear Search
-            </Link>
-          </div>
-          <div className={styles.animationDisplay}>
-            <Link
-              href="/BinarySearchPage"
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              Binary Search
-            </Link>
+        <div className={styles.planeContainer}>
+          <div className={`${styles.plane} ${styles.main}`}>
+            <div className={styles.circle}></div>
+            <div className={styles.circle}></div>
+            <div className={styles.circle}></div>
+            <div className={styles.circle}></div>
+            <div className={styles.circle}></div>
+            <div className={styles.circle}></div>
           </div>
         </div>
-        
       </div>
+
       <div
         style={{
-          width: "30%",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
         }}
       >
-        <header>
-          <h1 style={{ whiteSpace: "nowrap" }}>Sorting Algorithms</h1>
-        </header>
-        <div className={styles.container}>
-          <div className={styles.animationDisplay}>
+        <div style={{ display: "flex", flexDirection: "column", width: "40%" }}>
+          <p>
+            This websites purpose is to make you understand algorithms better by
+            visualizing them.
+          </p>
+          <p>This project supported by TÜBİTAK 2209-A</p>
+          <p>
+            This project is developed by students of Akdeniz University CSE
+            Department.
+          </p>
+          <div style={{ width: "50px" }}>
             <Link
-              href="/insertionSortPage"
-              style={{ textDecoration: "none", color: "white" }}
+              target="_blank"
+              href="https://github.com/durmusgulbahar/algorithm-visualizer"
             >
-              Insertion Sort
-            </Link>
-          </div>
-          <div className={styles.animationDisplay}>
-             <Link
-              href="/QuickSortPage"
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              Quick Sort
+              <Image
+                src={git}
+                alt="Github"
+                width={50}
+                height={50}
+                style={{
+                  cursor: "pointer",
+                  backgroundColor: "white",
+                  borderRadius: "50%",
+                  marginBottom: "20px",
+                }}
+              />
+
             </Link>
           </div>
         </div>
+      </div>
+
+      <div className={styles.linkAnimation}>
+        {" "}
+        <Link href={"/Categories"} style={{textDecoration:"none", color:"white"}}>Go to algorithms {">>"}</Link>
       </div>
 
     </div>
   );
 }
-
-
-
-

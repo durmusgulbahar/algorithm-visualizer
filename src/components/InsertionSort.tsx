@@ -99,29 +99,7 @@ const InsertionSortVisualizer = () => {
           )
         )}
       </div>
-      <div className={styles.barContainer}>
-        {InsertionSortStates[currentStep]?.currentListState.map(
-          (value, index) => (
-            <div
-              className={`${styles.bar} ${InsertionSortStates[currentStep].isPlacedCorrectLocation &&
-                index === InsertionSortStates[currentStep].currentIndex
-                ? styles.correctLocation
-                : ""
-                }`}
-              key={index}
-              style={{
-                height: `${(value + 15) * 1.5}px`,
-                backgroundColor: determineColor(
-                  index,
-                  InsertionSortStates[currentStep]
-                ),
-              }}
-            >
-              {value}
-            </div>
-          )
-        )}
-      </div>
+      
       <div className={styles.buttonContainer}>
         <button
           className={styles.sortButton}

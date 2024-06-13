@@ -1,4 +1,13 @@
+:root {
+    --primary: white;
+    --primary-hover: #0058f2;
+    --primary-solid: #0069ff2e;
+    --primary-dark: #003e96;
+  }
+
 body,
+
+
 html {
     margin: 0;
     padding: 3%;
